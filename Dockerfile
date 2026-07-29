@@ -26,7 +26,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_BUILD_STANDALONE=1
 # Cache incremental de compilación de Next (`.next/cache`) entre builds: reusa módulos ya
 # compilados → el `next build` deja de ser siempre en frío. Mayor palanca en CPU del KVM1.
-RUN --mount=type=cache,id=next,target=/app/.next/cache pnpm build
+RUN --mount=type=cache,id=next,target=/app/.next/cache pnpm exec next build --no-lint
 # Migrador de prod auto-contenido: bundlea el migrador de drizzle-orm + postgres en un
 # único archivo (el standalone no trae drizzle-kit). Se ejecuta vía Pre-Deployment Command.
 RUN pnpm exec esbuild scripts/migrate.mjs --bundle --platform=node --format=esm --outfile=migrate.mjs

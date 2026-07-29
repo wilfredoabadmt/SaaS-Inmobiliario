@@ -24,6 +24,16 @@ const nextConfig: NextConfig = {
     "@aws-sdk/client-s3",
     "@aws-sdk/s3-request-presigner",
   ],
+  outputFileTracingExcludes: {
+    "*": [
+      "node_modules/@playwright/**",
+      "node_modules/vitest/**",
+      "node_modules/esbuild/**",
+      "node_modules/typescript/**",
+      "node_modules/@types/**",
+      "node_modules/eslint/**",
+    ],
+  },
 };
 
 export default nextConfig;
