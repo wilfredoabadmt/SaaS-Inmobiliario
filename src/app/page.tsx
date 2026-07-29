@@ -479,7 +479,7 @@ export default function HomePage() {
               >
                 🏡
               </div>
-              <h3 style={{ fontSize: "1.1rem", fontWeight 800, color: "#F8FAFC", marginBottom: "0.5rem" }}>
+              <h3 style={{ fontSize: "1.1rem", fontWeight: 800, color: "#F8FAFC", marginBottom: "0.5rem" }}>
                 Inventario de Propiedades
               </h3>
               <p style={{ fontSize: "0.88rem", color: "#94A3B8", lineHeight: 1.6 }}>
