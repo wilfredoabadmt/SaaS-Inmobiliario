@@ -14,6 +14,16 @@ import * as authSchema from "@/lib/db/schema/auth";
 export const auth = betterAuth({
   secret: getEnv().BETTER_AUTH_SECRET,
   baseURL: getEnv().BETTER_AUTH_URL,
+  trustedOrigins: [
+    getEnv().BETTER_AUTH_URL,
+    getEnv().APP_BASE_URL,
+    getEnv().BETTER_AUTH_URL.replace("http://", "https://"),
+    getEnv().APP_BASE_URL.replace("http://", "https://"),
+    "https://saasinmobiliario.89.116.29.168.sslip.io",
+    "http://saasinmobiliario.89.116.29.168.sslip.io",
+    "https://b38eklbnuw07ejwsrj9qd18t.89.116.29.168.sslip.io",
+    "http://b38eklbnuw07ejwsrj9qd18t.89.116.29.168.sslip.io",
+  ],
   database: drizzleAdapter(getDb(), { provider: "pg", schema: authSchema }),
   emailAndPassword: { enabled: true },
   plugins: [organization()],
