@@ -17,13 +17,14 @@ FROM base AS deps
 COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml ./
 # Cache del store de pnpm entre builds (BuildKit): reusa paquetes ya descargados en vez
 # de bajarlos de cero cada deploy. El mount NO va a la imagen final (no la engorda).
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile --prefer-offline
 
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_BUILD_STANDALONE=1
+ENV NODE_OPTIONS="--max-old-space-size=2048"
 # Cache incremental de compilación de Next (`.next/cache`) entre builds: reusa módulos ya
 # compilados → el `next build` deja de ser siempre en frío. Mayor palanca en CPU del KVM1.
 RUN --mount=type=cache,id=next,target=/app/.next/cache pnpm exec next build --no-lint

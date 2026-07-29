@@ -34,6 +34,9 @@ const nextConfig: NextConfig = {
       "node_modules/eslint/**",
     ],
   },
+  experimental: {
+    cpus: 1,
+  },
 };
 
 export default nextConfig;
