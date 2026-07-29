@@ -1,0 +1,1 @@
+ALTER TABLE "client" ADD COLUMN "channel" text DEFAULT 'whatsapp' NOT NULL;

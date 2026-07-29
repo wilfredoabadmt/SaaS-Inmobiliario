@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design tokens — fuente de verdad: design_handoff_inmox/ (feature 003-design-system).
+ * Paleta papel cálida, modo claro. Operación: venta = teal/salvia, renta = bronce.
+ * Esta es la ÚNICA capa donde viven los valores literales (FR-006); el resto del
+ * código los consume vía Tailwind o var(--token).
+ */
+:root {
+  /* superficies (paleta papel cálida) */
+  --bg: #f6f4ef;            /* page: fondo de página, inputs, chips neutros */
+  --bg-panel: #ffffff;      /* card: tarjetas, paneles, topbars */
+  --bg-subtle: #f6f4ef;     /* fondo sutil (= page) */
+  --bg-hover: #f2f0ea;      /* thread / hover de filas */
+  --bg-sunken: #efece5;     /* riel, columnas Kanban, fila seleccionada */
+  --bg-active: #efece5;     /* compat: fila activa (= sunken) */
+  --surface-divider: #ebe8e1;
+  --chat-bg: #f2f0ea;
+
+  /* bordes (hairline cálido) */
+  --border: #e7e3da;        /* card */
+  --border-strong: #e6e1d7; /* control */
+  --fill-avatar-sm: #e2ddd2;
+
+  /* tinta (warm near-black) */
+  --text: #211d16;          /* ink/primary */
+  --ink-strong: #2a261d;
+  --ink: #211d16;
+  --ink-hover: #100d08;
+  --text-2: #46413a;        /* body */
+  --text-3: #5c574d;        /* muted */
+  --text-4: #7c776c;        /* faint */
+  --ink-faintest: #a8a39a;  /* micro-label, placeholder, timestamp */
+
+  /* acento de marca = teal/salvia (matching + venta) */
+  --accent: #126b60;
+  --accent-hover: #0f5a50;
+  --accent-soft: #d8e8e3;
+  --accent-tint: #eef4f1;
+  --accent-text: #126b60;
+
+  /* operación — venta (teal/salvia) */
+  --venta: #126b60;
+  --venta-dot: #1c9c8c;
+  --venta-tint: #eef4f1;
+  --venta-border: #cfe5dd;
+  --venta-text: #126b60;
+
+  /* operación — renta (bronce) */
+  --renta: #9a6a1a;
+  --renta-dot: #c89233;
+  --renta-tint: #f6efdc;
+  --renta-border: #e7d4a8;
+  --renta-text: #9a6a1a;
+
+  /* estado / presencia */
+  --status-online: #2f9e62;
+  --status-ok: #2f7d4f;
+
+  /* estatus de propiedad */
+  --prop-disp-text: #126b60; --prop-disp-dot: #2f9e62; --prop-disp-bg: #eef4f1;
+  --prop-apar-text: #9a6a1a; --prop-apar-dot: #c89233; --prop-apar-bg: #f6efdc;
+  --prop-cerr-text: #7c776c; --prop-cerr-dot: #a8a39a; --prop-cerr-bg: #ebe8e1;
+
+  /* estatus de visita */
+  --visit-agen-text: #3a5a8c; --visit-agen-dot: #5a7fb0; --visit-agen-bg: #eef1f6;
+  --visit-real-text: #126b60; --visit-real-dot: #2f9e62; --visit-real-bg: #eef4f1;
+  --visit-canc-text: #a13b32; --visit-canc-dot: #c0594e; --visit-canc-bg: #f6ecec;
+  --visit-nosh-text: #7c776c; --visit-nosh-dot: #a8a39a; --visit-nosh-bg: #ebe8e1;
+
+  /* puntos de etapa del pipeline */
+  --stage-nuevo: #9a958a;
+  --stage-contactado: #6b8cc4;
+  --stage-calificado: #1c9c8c;
+  --stage-visita: #c89233;
+  --stage-documentacion: #a394c9;
+  --stage-negociacion: #c97b86;
+  --stage-ganado: #2f9e62;
+
+  /* chat */
+  --bubble-out-bg: #e9f0e7;
+  --bubble-out-border: #d3e0cf;
+  --bubble-out-text: #211d16;
+  --bubble-in-bg: #ffffff;
+  --bubble-in-border: #e7e3da;
+  --receipt-read: #1c9c8c;
+  --receipt-sent: #a8a39a;
+  --win-open-text: #2f7d4f;
+  --win-open-bg: #f1f5f2;
+  --win-closed-text: #9a6a1a;
+  --win-closed-bg: #f7f1e3;
+
+  /* razones de match */
+  --match-ok-text: #126b60; --match-ok-bg: #eef4f1; --match-ok-border: #cfe5dd;
+  --match-no-text: #a13b32; --match-no-bg: #f6ecec; --match-no-border: #e8cfc9;
+
+  /* radios */
+  --radius-sm: 9px;
+  --radius: 11px;
+  --radius-lg: 14px;
+  --radius-rail: 12px;
+
+  /* sombras nombradas */
+  --shadow-rest: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 8px 26px rgba(0, 0, 0, 0.05);
+  --shadow-bubble: 0 1px 1px rgba(0, 0, 0, 0.03);
+  --shadow-ficha: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+* {
+  border-color: var(--border);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.006em;
+}
+
+/* Animación de pulso para puntos online / matching (handoff: 1 → .3 → 1, ~2s). */
+@keyframes inmox-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.animate-pulse-dot {
+  animation: inmox-pulse 2s ease-in-out infinite;
+}

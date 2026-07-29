@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;height:100%}
+  body{font-family:'Geist',-apple-system,BlinkMacSystemFont,sans-serif;background:#f6f4ef;color:#211d16;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;letter-spacing:-.006em}
+  button{font-family:inherit}
+  input,textarea{font-family:inherit}
+  ::-webkit-scrollbar{width:11px;height:11px}
+  ::-webkit-scrollbar-thumb{background:#e0dbd0;border-radius:8px;border:3px solid transparent;background-clip:padding-box}
+  ::-webkit-scrollbar-thumb:hover{background:#cfc9bd;background-clip:padding-box}
+  @keyframes inmoxPulse{0%{opacity:1}50%{opacity:.3}100%{opacity:1}}
+  @keyframes inmoxUp{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+
+<div style="display:flex;height:100vh;width:100%;overflow:hidden;background:#f6f4ef;">
+
+  <!-- ICON RAIL -->
+  <div style="width:66px;flex:none;background:#efece5;border-right:1px solid #e6e1d7;display:flex;flex-direction:column;align-items:center;padding:14px 0 16px;gap:5px;">
+    <img src="uploads/Inmox logo.png" alt="Inmox" style="width:38px;height:38px;border-radius:10px;object-fit:cover;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.18);">
+
+    <button onClick="{{ nav.go.dashboard }}" title="Inicio" style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;transition:all .15s;{{ nav.dash }}" style-hover="filter:brightness(.97)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+    </button>
+
+    <button onClick="{{ nav.go.inbox }}" title="Bandeja" style="position:relative;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;transition:all .15s;{{ nav.inbox }}" style-hover="filter:brightness(.97)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>
+      <span style="position:absolute;top:7px;right:8px;width:7px;height:7px;border-radius:50%;background:#2f9e62;border:1.5px solid #efece5;"></span>
+    </button>
+
+    <button onClick="{{ nav.go.props }}" title="Propiedades" style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;transition:all .15s;{{ nav.props }}" style-hover="filter:brightness(.97)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg>
+    </button>
+
+    <button onClick="{{ nav.go.clients }}" title="Clientes" style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;transition:all .15s;{{ nav.clients }}" style-hover="filter:brightness(.97)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    </button>
+
+    <button onClick="{{ nav.go.pipeline }}" title="Pipeline" style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;transition:all .15s;{{ nav.pipeline }}" style-hover="filter:brightness(.97)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
+    </button>
+
+    <button onClick="{{ nav.go.visits }}" title="Visitas" style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;transition:all .15s;{{ nav.visits }}" style-hover="filter:brightness(.97)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+    </button>
+
+    <div style="flex:1"></div>
+
+    <button onClick="{{ nav.go.config }}" title="Configuración" style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;transition:all .15s;{{ nav.config }}" style-hover="filter:brightness(.97)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+    <div style="width:34px;height:34px;border-radius:50%;background:#211d16;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;margin-top:4px;">CR</div>
+  </div>
+
+  <!-- ======================= INBOX ======================= -->
+  <sc-if value="{{ isInbox }}" hint-placeholder-val="{{ true }}">
+  <div style="flex:1;display:flex;min-width:0;height:100vh;">
+
+    <!-- LEFT: conversation list -->
+    <div style="width:330px;flex:none;background:#ffffff;border-right:1px solid #e7e3da;display:flex;flex-direction:column;min-height:0;">
+      <div style="padding:18px 18px 12px;border-bottom:1px solid #ebe8e1;">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;">
+          <h1 style="margin:0;font-size:19px;font-weight:600;letter-spacing:-.02em;">Bandeja</h1>
+          <span style="font-size:12px;color:#a8a39a;font-weight:500;">{{ list.length }} chats</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;margin-top:7px;">
+          <span style="width:7px;height:7px;border-radius:50%;background:#2f9e62;animation:inmoxPulse 2.2s infinite;"></span>
+          <span style="font-size:12px;color:#5c574d;font-weight:500;">WhatsApp conectado</span>
+          <span style="font-size:12px;color:#a8a39a;">· +52 55 4040 1212</span>
+        </div>
+        <div style="position:relative;margin-top:13px;">
+          <svg style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#a8a39a;" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input value="{{ search }}" onInput="{{ onSearch }}" placeholder="Buscar nombre, teléfono o propiedad" style="width:100%;border:1px solid #e6e1d7;background:#f6f4ef;border-radius:9px;padding:9px 11px 9px 32px;font-size:13px;outline:none;color:#211d16;" style-focus="border-color:#211d16;background:#fff">
+        </div>
+        <div style="display:flex;gap:6px;margin-top:11px;">
+          <sc-for list="{{ filters }}" as="f" hint-placeholder-count="4">
+            <button onClick="{{ f.onClick }}" style="border:1px solid {{ f.border }};background:{{ f.bg }};color:{{ f.color }};font-size:11.5px;font-weight:600;padding:5px 10px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:all .12s;">{{ f.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="flex:1;overflow-y:auto;min-height:0;">
+        <sc-for list="{{ list }}" as="c" hint-placeholder-count="5">
+          <div onClick="{{ c.onSelect }}" style="display:flex;gap:11px;padding:13px 16px 13px 13px;cursor:pointer;border-bottom:1px solid #efece5;border-left:3px solid {{ c.accent }};background:{{ c.rowBg }};transition:background .1s;" style-hover="background:#f2f0ea">
+            <div style="position:relative;flex:none;">
+              <div style="width:42px;height:42px;border-radius:50%;background:{{ c.avatarBg }};color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;">{{ c.initials }}</div>
+              <sc-if value="{{ c.showUnread }}"><span style="position:absolute;top:-1px;right:-1px;width:11px;height:11px;border-radius:50%;background:#2f9e62;border:2px solid #fff;"></span></sc-if>
+            </div>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                <span style="font-size:13.5px;font-weight:{{ c.nameWeight }};color:#211d16;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ c.name }}</span>
+                <span style="font-size:11px;color:{{ c.timeColor }};flex:none;font-weight:500;">{{ c.time }}</span>
+              </div>
+              <div style="font-size:12.5px;color:{{ c.msgColor }};margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ c.lastMsg }}</div>
+              <div style="display:flex;align-items:center;gap:6px;margin-top:6px;">
+                <span style="display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;color:{{ c.opColor }};background:{{ c.opBg }};border:1px solid {{ c.opBorder }};padding:2px 7px;border-radius:999px;"><span style="width:5px;height:5px;border-radius:50%;background:{{ c.opDot }};"></span>{{ c.opLabel }}</span>
+                <span style="font-size:11px;color:#a8a39a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ c.prop }}</span>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- CENTER: chat thread -->
+    <div style="flex:1;display:flex;flex-direction:column;min-width:0;background:#f2f0ea;min-height:0;">
+      <!-- thread header -->
+      <div style="flex:none;background:#fff;border-bottom:1px solid #e7e3da;padding:13px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;">
+        <div style="display:flex;align-items:center;gap:11px;min-width:0;">
+          <div style="width:40px;height:40px;border-radius:50%;background:{{ convInitialsBg }};color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;flex:none;">{{ conv.initials }}</div>
+          <div style="min-width:0;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:15px;font-weight:600;letter-spacing:-.01em;">{{ conv.name }}</span>
+              <span style="display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;color:{{ convChipColor }};background:{{ convChipBg }};border:1px solid {{ convChipBorder }};padding:2px 7px;border-radius:999px;"><span style="width:5px;height:5px;border-radius:50%;background:{{ convChipDot }};"></span>{{ convChipLabel }}</span>
+            </div>
+            <div style="font-size:12px;color:#a8a39a;margin-top:2px;">{{ conv.phone }}</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;flex:none;">
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#5c574d;background:#f6f4ef;border:1px solid #e7e3da;padding:6px 10px;border-radius:8px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            {{ conv.stage }}
+          </div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:#46413a;background:#f6f4ef;border:1px solid #e7e3da;padding:6px 10px;border-radius:8px;">
+            <span style="width:20px;height:20px;border-radius:50%;background:#e2ddd2;color:#5c574d;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;">{{ conv.assignedInitials }}</span>
+            {{ conv.assigned }}
+          </div>
+        </div>
+      </div>
+
+      <!-- 24h window strip -->
+      <div style="flex:none;display:flex;align-items:center;justify-content:center;gap:7px;padding:7px;background:{{ windowStripBg }};border-bottom:1px solid #e7e3da;">
+        <span style="width:6px;height:6px;border-radius:50%;background:{{ windowDot }};"></span>
+        <span style="font-size:11.5px;font-weight:600;color:{{ windowColor }};">{{ windowText }}</span>
+        <span style="font-size:11.5px;color:#a8a39a;">{{ windowSub }}</span>
+      </div>
+
+      <!-- messages -->
+      <div ref="{{ threadRef }}" style="flex:1;overflow-y:auto;padding:20px 22px;display:flex;flex-direction:column;gap:9px;min-height:0;">
+        <sc-for list="{{ messages }}" as="m" hint-placeholder-count="6">
+          <sc-if value="{{ m.isDate }}">
+            <div style="display:flex;justify-content:center;margin:6px 0;"><span style="font-size:11px;font-weight:600;color:#a8a39a;background:#e7e3da;padding:3px 11px;border-radius:999px;">{{ m.text }}</span></div>
+          </sc-if>
+          <sc-if value="{{ m.isText }}">
+            <div style="display:flex;justify-content:{{ m.justify }};">
+              <div style="max-width:74%;background:{{ m.bubbleBg }};border:1px solid {{ m.bubbleBorder }};border-radius:14px;padding:9px 13px;box-shadow:0 1px 1px rgba(0,0,0,.03);">
+                <div style="font-size:13.5px;line-height:1.45;color:#211d16;white-space:pre-wrap;">{{ m.text }}</div>
+                <div style="display:flex;align-items:center;justify-content:flex-end;gap:4px;margin-top:3px;">
+                  <span style="font-size:10px;color:#a8a39a;">{{ m.time }}</span>
+                  <sc-if value="{{ m.isRead }}"><svg width="15" height="11" viewBox="0 0 18 12" fill="none" stroke="#1c9c8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6.5 4.5 10 11 2.5"/><path d="M7 9.5 8 10.5 14.5 3"/></svg></sc-if>
+                  <sc-if value="{{ m.isDelivered }}"><svg width="15" height="11" viewBox="0 0 18 12" fill="none" stroke="#a8a39a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6.5 4.5 10 11 2.5"/><path d="M7 9.5 8 10.5 14.5 3"/></svg></sc-if>
+                  <sc-if value="{{ m.isSent }}"><svg width="10" height="9" viewBox="0 0 12 10" fill="none" stroke="#a8a39a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5.5 4.5 9 11 1.5"/></svg></sc-if>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ m.isProperty }}">
+            <div style="display:flex;justify-content:{{ m.justify }};">
+              <div style="width:265px;background:#fff;border:1px solid #e6e1d7;border-radius:14px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.06);">
+                <div style="height:96px;background:{{ m.prop.grad }};position:relative;display:flex;align-items:flex-end;padding:8px;">
+                  <svg style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.5" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg>
+                  <span style="position:relative;font-size:10px;font-weight:600;color:#fff;background:rgba(0,0,0,.4);backdrop-filter:blur(4px);padding:3px 8px;border-radius:999px;">{{ m.prop.opLabel }}</span>
+                </div>
+                <div style="padding:11px 13px;">
+                  <div style="font-size:13px;font-weight:600;color:#211d16;line-height:1.3;">{{ m.prop.name }}</div>
+                  <div style="font-size:11.5px;color:#a8a39a;margin-top:3px;">{{ m.prop.colonia }}, {{ m.prop.city }}</div>
+                  <div style="font-size:16px;font-weight:700;color:#211d16;margin-top:7px;letter-spacing:-.02em;">{{ m.prop.priceStr }}</div>
+                  <div style="font-size:11.5px;color:#5c574d;margin-top:4px;">{{ m.prop.specs }}</div>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:flex-end;gap:4px;padding:0 11px 9px;">
+                  <span style="font-size:10px;color:#a8a39a;">{{ m.time }}</span>
+                  <svg width="15" height="11" viewBox="0 0 18 12" fill="none" stroke="#a8a39a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6.5 4.5 10 11 2.5"/><path d="M7 9.5 8 10.5 14.5 3"/></svg>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+        </sc-for>
+      </div>
+
+      <!-- composer -->
+      <div style="flex:none;background:#fff;border-top:1px solid #e7e3da;padding:13px 18px;">
+        <sc-if value="{{ showComposer }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;align-items:flex-end;gap:9px;">
+            <button title="Adjuntar" style="width:38px;height:38px;flex:none;border:1px solid #e6e1d7;background:#f6f4ef;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#7c776c;" style-hover="background:#ebe8e1">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+            </button>
+            <input value="{{ draft }}" onInput="{{ onDraft }}" onKeyDown="{{ onKey }}" placeholder="Escribe un mensaje…" style="flex:1;border:1px solid #e6e1d7;background:#f6f4ef;border-radius:11px;padding:10px 14px;font-size:13.5px;outline:none;color:#211d16;" style-focus="border-color:#211d16;background:#fff">
+            <button onClick="{{ send }}" style="width:38px;height:38px;flex:none;border:none;background:#211d16;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;" style-hover="background:#000">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+            </button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ showTemplateComposer }}">
+          <div style="border:1px dashed #f0cf95;background:#f7f1e3;border-radius:11px;padding:13px 15px;">
+            <div style="display:flex;align-items:center;gap:7px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9a6a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+              <span style="font-size:12.5px;font-weight:600;color:#6b5236;">Ventana de 24 h cerrada</span>
+            </div>
+            <p style="margin:6px 0 11px;font-size:12px;color:#9a7526;line-height:1.5;">Para reabrir la conversación debes enviar una plantilla aprobada por Meta.</p>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <button onClick="{{ sendTemplate }}" style="display:flex;align-items:center;gap:7px;border:none;background:#211d16;color:#fff;font-size:12.5px;font-weight:600;padding:9px 14px;border-radius:9px;cursor:pointer;" style-hover="background:#000">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                Enviar plantilla «recordatorio_visita»
+              </button>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+
+    <!-- RIGHT: matching + context -->
+    <div style="width:374px;flex:none;background:#fff;border-left:1px solid #e7e3da;display:flex;flex-direction:column;min-height:0;">
+      <div style="flex:1;overflow-y:auto;min-height:0;">
+        <!-- MATCHING EN VIVO (star) -->
+        <div style="padding:17px 18px 6px;background:linear-gradient(180deg,#f3f6f3,#ffffff);border-bottom:1px solid #ebe8e1;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:#126b60;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8L4 9.7l4.4 4.1L7.3 20 12 16.9 16.7 20l-1.1-6.2L20 9.7l-6.1-.9z"/></svg>
+              </span>
+              <div>
+                <div style="font-size:14px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:6px;">Matching en vivo <span style="width:6px;height:6px;border-radius:50%;background:#2f9e62;animation:inmoxPulse 1.8s infinite;"></span></div>
+                <div style="font-size:11px;color:#7c776c;margin-top:1px;">{{ matches.length }} propiedades para {{ conv.firstName }}</div>
+              </div>
+            </div>
+          </div>
+          <!-- requirements summary -->
+          <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:11px;margin-bottom:4px;">
+            <sc-for list="{{ reqChips }}" as="r" hint-placeholder-count="4">
+              <span style="font-size:10.5px;font-weight:500;color:#5c574d;background:#efece5;border:1px solid #e7e3da;padding:3px 8px;border-radius:7px;">{{ r }}</span>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:11px;">
+          <sc-for list="{{ matches }}" as="m" hint-placeholder-count="3">
+            <div style="border:1px solid #e6e1d7;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.04);">
+              <div style="display:flex;gap:11px;padding:11px;">
+                <div style="width:74px;height:74px;flex:none;border-radius:10px;background:{{ m.grad }};position:relative;display:flex;align-items:center;justify-content:center;">
+                  <svg style="opacity:.55" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg>
+                </div>
+                <div style="flex:1;min-width:0;">
+                  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:6px;">
+                    <span style="font-size:13px;font-weight:600;color:#211d16;line-height:1.25;">{{ m.name }}</span>
+                    <span style="flex:none;font-size:18px;font-weight:600;color:{{ m.pctColor }};letter-spacing:-.03em;">{{ m.pctLabel }}</span>
+                  </div>
+                  <div style="font-size:11px;color:#a8a39a;margin-top:2px;">{{ m.colonia }}, {{ m.city }}</div>
+                  <div style="font-size:14px;font-weight:700;color:#211d16;margin-top:5px;letter-spacing:-.02em;">{{ m.priceStr }}</div>
+                  <!-- match bar -->
+                  <div style="height:5px;border-radius:999px;background:#ebe8e1;margin-top:7px;overflow:hidden;">
+                    <div style="height:100%;width:{{ m.barWidth }};background:{{ m.barColor }};border-radius:999px;"></div>
+                  </div>
+                </div>
+              </div>
+              <div style="padding:0 11px 10px;">
+                <div style="font-size:11px;color:#5c574d;margin-bottom:6px;">{{ m.specs }}</div>
+                <div style="display:flex;flex-wrap:wrap;gap:5px;">
+                  <sc-for list="{{ m.reasons }}" as="r" hint-placeholder-count="3">
+                    <span style="display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:500;color:{{ r.chipColor }};background:{{ r.chipBg }};border:1px solid {{ r.chipBorder }};padding:3px 8px;border-radius:7px;">
+                      <sc-if value="{{ r.ok }}"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></sc-if>
+                      <sc-if value="{{ r.bad }}"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></sc-if>
+                      {{ r.label }}
+                    </span>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ m.expanded }}">
+                  <p style="margin:9px 0 0;font-size:11.5px;line-height:1.5;color:#5c574d;background:#f6f4ef;border:1px solid #ebe8e1;border-radius:8px;padding:8px 10px;">{{ m.why }}</p>
+                </sc-if>
+                <div style="display:flex;gap:7px;margin-top:10px;">
+                  <button onClick="{{ m.onSend }}" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;border:none;background:#211d16;color:#fff;font-size:12px;font-weight:600;padding:9px 10px;border-radius:9px;cursor:pointer;" style-hover="background:#000">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                    Enviar ficha
+                  </button>
+                  <button onClick="{{ m.onToggle }}" style="flex:none;border:1px solid #e6e1d7;background:#fff;color:#5c574d;font-size:12px;font-weight:600;padding:9px 12px;border-radius:9px;cursor:pointer;" style-hover="background:#f2f0ea">{{ m.toggleLabel }}</button>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- CLIENT CONTEXT -->
+        <div style="padding:6px 18px 22px;border-top:1px solid #ebe8e1;margin-top:4px;">
+          <div style="font-size:11px;font-weight:700;color:#a8a39a;text-transform:uppercase;letter-spacing:.06em;margin:14px 0 10px;">Datos del cliente</div>
+          <div style="display:flex;flex-direction:column;gap:9px;">
+            <div style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:#46413a;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a8a39a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>{{ conv.phone }}</div>
+            <div style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:#46413a;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a8a39a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>{{ conv.email }}</div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:#a8a39a;text-transform:uppercase;letter-spacing:.06em;margin:18px 0 8px;">Notas internas</div>
+          <p style="margin:0;font-size:12.5px;line-height:1.55;color:#5c574d;background:#f6f4ef;border:1px solid #ebe8e1;border-radius:10px;padding:11px 13px;">{{ conv.notes }}</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </sc-if>
+
+  <!-- ======================= DASHBOARD ======================= -->
+  <sc-if value="{{ isDashboard }}">
+  <div style="flex:1;overflow-y:auto;height:100vh;background:#f6f4ef;">
+    <div style="max-width:1180px;margin:0 auto;padding:34px 40px 48px;">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;">
+        <div>
+          <h1 style="margin:0;font-size:25px;font-weight:600;letter-spacing:-.025em;">Buenos días, Carlos</h1>
+          <p style="margin:5px 0 0;font-size:13.5px;color:#7c776c;">Miércoles 18 de junio · Inmobiliaria Altavista</p>
+        </div>
+        <button onClick="{{ nav.go.inbox }}" style="display:flex;align-items:center;gap:7px;border:1px solid #e6e1d7;background:#fff;color:#211d16;font-size:13px;font-weight:600;padding:9px 15px;border-radius:10px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.04);" style-hover="background:#f2f0ea">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>
+          Ir a la bandeja
+        </button>
+      </div>
+
+      <!-- SLA alert -->
+      <div style="display:flex;align-items:center;gap:11px;margin-top:22px;background:#f7f1e3;border:1px solid #e7d4a8;border-radius:13px;padding:13px 16px;">
+        <span style="width:30px;height:30px;flex:none;border-radius:9px;background:#efe2c4;display:flex;align-items:center;justify-content:center;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9a6a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </span>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:600;color:#6b5236;">4 leads sin responder hace más de 30 min</div>
+          <div style="font-size:12px;color:#9a7526;margin-top:1px;">El SLA del equipo es de 15 min. Reasigna o responde para no perderlos.</div>
+        </div>
+        <button onClick="{{ nav.go.inbox }}" style="flex:none;border:1px solid #dcc792;background:#fff;color:#6b5236;font-size:12.5px;font-weight:600;padding:8px 13px;border-radius:9px;cursor:pointer;" style-hover="background:#f3ebd9">Revisar</button>
+      </div>
+
+      <!-- KPIs -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:15px;margin-top:18px;">
+        <div style="background:#fff;border:1px solid #e7e3da;border-radius:14px;padding:17px 18px;">
+          <div style="font-size:12.5px;color:#7c776c;font-weight:500;">Leads nuevos</div>
+          <div style="font-size:30px;font-weight:600;letter-spacing:-.03em;margin-top:6px;">12</div>
+          <div style="display:inline-flex;align-items:center;gap:3px;font-size:11.5px;font-weight:600;color:#126b60;background:#eef4f1;padding:2px 7px;border-radius:6px;margin-top:7px;">▲ 3 hoy</div>
+        </div>
+        <div style="background:#fff;border:1px solid #e7e3da;border-radius:14px;padding:17px 18px;">
+          <div style="font-size:12.5px;color:#7c776c;font-weight:500;">Conversaciones activas</div>
+          <div style="font-size:30px;font-weight:600;letter-spacing:-.03em;margin-top:6px;">28</div>
+          <div style="font-size:11.5px;color:#a8a39a;margin-top:7px;">9 sin asignar</div>
+        </div>
+        <div style="background:#fff;border:1px solid #e7e3da;border-radius:14px;padding:17px 18px;">
+          <div style="font-size:12.5px;color:#7c776c;font-weight:500;">Visitas esta semana</div>
+          <div style="font-size:30px;font-weight:600;letter-spacing:-.03em;margin-top:6px;">7</div>
+          <div style="font-size:11.5px;color:#a8a39a;margin-top:7px;">2 hoy · 3 mañana</div>
+        </div>
+        <div style="background:#fff;border:1px solid #e7e3da;border-radius:14px;padding:17px 18px;">
+          <div style="font-size:12.5px;color:#7c776c;font-weight:500;">Cierres del mes</div>
+          <div style="font-size:30px;font-weight:600;letter-spacing:-.03em;margin-top:6px;">3</div>
+          <div style="display:inline-flex;align-items:center;gap:3px;font-size:11.5px;font-weight:600;color:#126b60;background:#eef4f1;padding:2px 7px;border-radius:6px;margin-top:7px;">$14.2M MXN</div>
+        </div>
+        <div style="background:#fff;border:1px solid #e7d4a8;border-radius:14px;padding:17px 18px;">
+          <div style="font-size:12.5px;color:#6b5236;font-weight:500;">Sin responder</div>
+          <div style="font-size:30px;font-weight:600;letter-spacing:-.03em;margin-top:6px;color:#9a6a1a;">4</div>
+          <div style="font-size:11.5px;color:#9a7526;margin-top:7px;">&gt; 30 min de espera</div>
+        </div>
+      </div>
+
+      <!-- two columns -->
+      <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:18px;margin-top:18px;">
+        <div style="background:#fff;border:1px solid #e7e3da;border-radius:14px;padding:18px 20px;">
+          <div style="font-size:14px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px;">Actividad reciente del equipo</div>
+          <div>
+            <sc-for list="{{ activity }}" as="a" hint-placeholder-count="5">
+              <div style="display:flex;gap:11px;padding:11px 0;border-top:1px solid #efece5;">
+                <span style="width:30px;height:30px;flex:none;border-radius:50%;background:{{ a.bg }};color:{{ a.color }};display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;">{{ a.who }}</span>
+                <div style="flex:1;">
+                  <div style="font-size:12.5px;color:#46413a;line-height:1.45;">{{ a.text }}</div>
+                  <div style="font-size:11px;color:#a8a39a;margin-top:2px;">{{ a.time }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid #e7e3da;border-radius:14px;padding:18px 20px;">
+          <div style="font-size:14px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px;">Próximas visitas</div>
+          <div>
+            <sc-for list="{{ visits }}" as="v" hint-placeholder-count="3">
+              <div style="display:flex;gap:11px;padding:12px 0;border-top:1px solid #efece5;">
+                <div style="width:42px;flex:none;text-align:center;background:#f6f4ef;border:1px solid #e7e3da;border-radius:9px;padding:5px 0;">
+                  <div style="font-size:9px;font-weight:600;color:#a8a39a;text-transform:uppercase;">{{ v.mon }}</div>
+                  <div style="font-size:16px;font-weight:700;color:#211d16;line-height:1;">{{ v.day }}</div>
+                </div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:12.5px;font-weight:600;color:#211d16;">{{ v.who }}</div>
+                  <div style="font-size:11.5px;color:#7c776c;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ v.prop }}</div>
+                  <div style="font-size:11px;color:#a8a39a;margin-top:3px;">{{ v.time }} · {{ v.agent }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ======================= PROPIEDADES ======================= -->
+  <sc-if value="{{ isProps }}">
+  <div style="flex:1;overflow-y:auto;height:100vh;background:#f6f4ef;">
+    <div style="max-width:1180px;margin:0 auto;padding:30px 40px 48px;">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <div>
+          <h1 style="margin:0;font-size:24px;font-weight:600;letter-spacing:-.025em;">Propiedades</h1>
+          <p style="margin:5px 0 0;font-size:13.5px;color:#7c776c;">{{ properties.length }} en inventario · Inmobiliaria Altavista</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="display:flex;background:#ebe8e1;border:1px solid #e6e1d7;border-radius:10px;padding:3px;gap:3px;">
+            <button onClick="{{ setCards }}" style="display:flex;align-items:center;gap:6px;border:none;background:{{ cardsViewBg }};color:{{ cardsViewColor }};font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:7px;cursor:pointer;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>Tarjetas</button>
+            <button onClick="{{ setTable }}" style="display:flex;align-items:center;gap:6px;border:none;background:{{ tableViewBg }};color:{{ tableViewColor }};font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:7px;cursor:pointer;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>Tabla</button>
+          </div>
+          <button style="display:flex;align-items:center;gap:7px;border:none;background:#211d16;color:#fff;font-size:13px;font-weight:600;padding:9px 15px;border-radius:10px;cursor:pointer;" style-hover="background:#000">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>Nueva propiedad</button>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:14px;margin-top:20px;flex-wrap:wrap;">
+        <div style="display:flex;gap:6px;">
+          <sc-for list="{{ propOpFilters }}" as="f" hint-placeholder-count="3"><button onClick="{{ f.onClick }}" style="border:1px solid {{ f.border }};background:{{ f.bg }};color:{{ f.color }};font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;">{{ f.label }}</button></sc-for>
+        </div>
+        <span style="width:1px;height:20px;background:#e2ddd2;"></span>
+        <div style="display:flex;gap:6px;">
+          <sc-for list="{{ propStatusFilters }}" as="f" hint-placeholder-count="4"><button onClick="{{ f.onClick }}" style="border:1px solid {{ f.border }};background:{{ f.bg }};color:{{ f.color }};font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;">{{ f.label }}</button></sc-for>
+        </div>
+      </div>
+
+      <sc-if value="{{ isCards }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:16px;margin-top:20px;">
+          <sc-for list="{{ properties }}" as="p" hint-placeholder-count="6">
+            <div style="background:#fff;border:1px solid #e7e3da;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04);" style-hover="box-shadow:0 8px 26px rgba(0,0,0,.05)">
+              <div style="height:128px;background:{{ p.grad }};position:relative;display:flex;align-items:flex-start;justify-content:space-between;padding:10px;">
+                <span style="display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:600;color:{{ p.statusColor }};background:#fff;padding:3px 9px;border-radius:999px;"><span style="width:5px;height:5px;border-radius:50%;background:{{ p.statusDot }};"></span>{{ p.statusLabel }}</span>
+                <span style="font-size:10.5px;font-weight:600;color:#fff;background:rgba(0,0,0,.4);backdrop-filter:blur(4px);padding:3px 9px;border-radius:999px;">{{ p.opLabel }}</span>
+                <svg style="position:absolute;bottom:10px;left:12px;opacity:.45" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg>
+              </div>
+              <div style="padding:13px 14px;">
+                <div style="font-size:13.5px;font-weight:600;color:#211d16;line-height:1.3;">{{ p.name }}</div>
+                <div style="font-size:11.5px;color:#a8a39a;margin-top:3px;">{{ p.colonia }}, {{ p.city }} · {{ p.type }}</div>
+                <div style="font-size:18px;font-weight:700;color:#211d16;margin-top:9px;letter-spacing:-.02em;">{{ p.priceStr }} <span style="font-size:11px;font-weight:500;color:#a8a39a;">MXN</span></div>
+                <div style="font-size:11.5px;color:#5c574d;margin-top:5px;">{{ p.specs }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isTable }}">
+        <div style="margin-top:20px;background:#fff;border:1px solid #e7e3da;border-radius:14px;overflow:hidden;">
+          <div style="display:grid;grid-template-columns:2.4fr 1fr 1.4fr 1.3fr 1.2fr;gap:12px;padding:12px 18px;background:#f6f4ef;border-bottom:1px solid #ebe8e1;font-size:11px;font-weight:700;color:#a8a39a;text-transform:uppercase;letter-spacing:.05em;">
+            <span>Propiedad</span><span>Operación</span><span>Zona</span><span>Precio</span><span>Estatus</span>
+          </div>
+          <sc-for list="{{ properties }}" as="p" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:2.4fr 1fr 1.4fr 1.3fr 1.2fr;gap:12px;padding:13px 18px;border-bottom:1px solid #efece5;align-items:center;" style-hover="background:#f6f4ef">
+              <div style="display:flex;align-items:center;gap:11px;min-width:0;">
+                <span style="width:38px;height:38px;flex:none;border-radius:9px;background:{{ p.grad }};"></span>
+                <div style="min-width:0;"><div style="font-size:13px;font-weight:600;color:#211d16;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ p.name }}</div><div style="font-size:11px;color:#a8a39a;">{{ p.type }} · {{ p.specs }}</div></div>
+              </div>
+              <span><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:{{ p.opColor }};background:{{ p.opBg }};border:1px solid {{ p.opBorder }};padding:3px 9px;border-radius:999px;"><span style="width:5px;height:5px;border-radius:50%;background:{{ p.opDot }};"></span>{{ p.opLabel }}</span></span>
+              <span style="font-size:12.5px;color:#5c574d;">{{ p.colonia }}, {{ p.city }}</span>
+              <span style="font-size:13px;font-weight:600;color:#211d16;">{{ p.priceStr }}</span>
+              <span><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:{{ p.statusColor }};background:{{ p.statusBg }};padding:3px 9px;border-radius:999px;"><span style="width:5px;height:5px;border-radius:50%;background:{{ p.statusDot }};"></span>{{ p.statusLabel }}</span></span>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ======================= PIPELINE ======================= -->
+  <sc-if value="{{ isPipeline }}">
+  <div style="flex:1;display:flex;flex-direction:column;height:100vh;background:#f6f4ef;min-width:0;">
+    <div style="flex:none;padding:26px 32px 18px;">
+      <h1 style="margin:0;font-size:24px;font-weight:600;letter-spacing:-.025em;">Pipeline de ventas</h1>
+      <p style="margin:5px 0 0;font-size:13.5px;color:#7c776c;">Arrastra el flujo con las flechas de cada tarjeta · cliente + propiedad + asesor</p>
+    </div>
+    <div style="flex:1;overflow-x:auto;overflow-y:hidden;min-height:0;padding:0 32px 28px;">
+      <div style="display:flex;gap:13px;height:100%;align-items:stretch;">
+        <sc-for list="{{ pipelineColumns }}" as="col" hint-placeholder-count="7">
+          <div style="width:248px;flex:none;display:flex;flex-direction:column;background:#efece5;border:1px solid #e7e3da;border-radius:13px;min-height:0;">
+            <div style="flex:none;display:flex;align-items:center;gap:8px;padding:12px 13px;border-bottom:1px solid #e6e1d7;">
+              <span style="width:8px;height:8px;border-radius:50%;background:{{ col.color }};"></span>
+              <span style="font-size:12.5px;font-weight:700;color:#46413a;flex:1;">{{ col.label }}</span>
+              <span style="font-size:11px;font-weight:700;color:#7c776c;background:#fff;border:1px solid #e6e1d7;min-width:20px;text-align:center;padding:1px 6px;border-radius:999px;">{{ col.count }}</span>
+            </div>
+            <div style="flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:9px;min-height:0;">
+              <sc-for list="{{ col.cards }}" as="card" hint-placeholder-count="2">
+                <div style="background:#fff;border:1px solid #e6e1d7;border-radius:11px;padding:11px;box-shadow:0 1px 2px rgba(0,0,0,.04);">
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <span style="width:6px;height:6px;border-radius:50%;background:{{ card.opDot }};"></span>
+                    <span style="font-size:13px;font-weight:600;color:#211d16;line-height:1.2;">{{ card.client }}</span>
+                  </div>
+                  <div style="font-size:11.5px;color:#7c776c;margin-top:5px;line-height:1.35;">{{ card.prop }}</div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;">
+                    <span style="display:flex;align-items:center;gap:6px;font-size:11px;color:#a8a39a;"><span style="width:19px;height:19px;border-radius:50%;background:#e2ddd2;color:#5c574d;display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:700;">{{ card.ai }}</span>{{ card.agent }}</span>
+                    <div style="display:flex;gap:4px;">
+                      <button onClick="{{ card.onPrev }}" title="Etapa anterior" style="width:24px;height:24px;border:1px solid #e7e3da;background:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:{{ card.prevColor }};" style-hover="background:#f2f0ea"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+                      <button onClick="{{ card.onNext }}" title="Avanzar etapa" style="width:24px;height:24px;border:1px solid #e7e3da;background:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:{{ card.nextColor }};" style-hover="background:#f2f0ea"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+                    </div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ======================= VISITAS ======================= -->
+  <sc-if value="{{ isVisits }}">
+  <div style="flex:1;overflow-y:auto;height:100vh;background:#f6f4ef;">
+    <div style="max-width:880px;margin:0 auto;padding:30px 40px 48px;">
+      <h1 style="margin:0;font-size:24px;font-weight:600;letter-spacing:-.025em;">Visitas</h1>
+      <p style="margin:5px 0 0 0;font-size:13.5px;color:#7c776c;">Próximas y recientes · recordatorio automático por WhatsApp al cliente</p>
+      <div style="display:flex;flex-direction:column;gap:11px;margin-top:22px;">
+        <sc-for list="{{ visitsAll }}" as="v" hint-placeholder-count="5">
+          <div style="display:flex;align-items:center;gap:15px;background:#fff;border:1px solid #e7e3da;border-radius:13px;padding:14px 16px;" style-hover="box-shadow:0 6px 22px rgba(0,0,0,.04)">
+            <div style="width:50px;flex:none;text-align:center;background:#f6f4ef;border:1px solid #e7e3da;border-radius:10px;padding:7px 0;">
+              <div style="font-size:9.5px;font-weight:600;color:#a8a39a;text-transform:uppercase;">{{ v.mon }}</div>
+              <div style="font-size:19px;font-weight:700;color:#211d16;line-height:1;">{{ v.day }}</div>
+            </div>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;align-items:center;gap:7px;"><span style="width:6px;height:6px;border-radius:50%;background:{{ v.opDot }};"></span><span style="font-size:14px;font-weight:600;color:#211d16;">{{ v.who }}</span></div>
+              <div style="font-size:12.5px;color:#7c776c;margin-top:3px;">{{ v.prop }}</div>
+              <div style="font-size:11.5px;color:#a8a39a;margin-top:4px;">{{ v.time }} · {{ v.agent }}</div>
+            </div>
+            <span style="flex:none;display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:{{ v.sColor }};background:{{ v.sBg }};padding:5px 11px;border-radius:999px;"><span style="width:5px;height:5px;border-radius:50%;background:{{ v.sDot }};"></span>{{ v.sLabel }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ======================= CLIENTES ======================= -->
+  <sc-if value="{{ isClients }}">
+  <div style="flex:1;overflow-y:auto;height:100vh;background:#f6f4ef;">
+    <div style="max-width:1020px;margin:0 auto;padding:30px 40px 48px;">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <div>
+          <h1 style="margin:0;font-size:24px;font-weight:600;letter-spacing:-.025em;">Clientes</h1>
+          <p style="margin:5px 0 0;font-size:13.5px;color:#7c776c;">{{ clients.length }} contactos</p>
+        </div>
+        <div style="position:relative;">
+          <svg style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#a8a39a;" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input value="{{ clientSearch }}" onInput="{{ onClientSearch }}" placeholder="Buscar cliente" style="width:240px;border:1px solid #e6e1d7;background:#fff;border-radius:10px;padding:9px 12px 9px 32px;font-size:13px;outline:none;color:#211d16;" style-focus="border-color:#211d16">
+        </div>
+      </div>
+      <div style="margin-top:20px;background:#fff;border:1px solid #e7e3da;border-radius:14px;overflow:hidden;">
+        <div style="display:grid;grid-template-columns:2fr 1.5fr 1fr 1.4fr 0.9fr;gap:12px;padding:12px 18px;background:#f6f4ef;border-bottom:1px solid #ebe8e1;font-size:11px;font-weight:700;color:#a8a39a;text-transform:uppercase;letter-spacing:.05em;">
+          <span>Cliente</span><span>Interés</span><span>Operación</span><span>Etapa</span><span>Contacto</span>
+        </div>
+        <sc-for list="{{ clients }}" as="c" hint-placeholder-count="6">
+          <div style="display:grid;grid-template-columns:2fr 1.5fr 1fr 1.4fr 0.9fr;gap:12px;padding:13px 18px;border-bottom:1px solid #efece5;align-items:center;" style-hover="background:#f6f4ef">
+            <div style="display:flex;align-items:center;gap:11px;min-width:0;">
+              <span style="width:36px;height:36px;flex:none;border-radius:50%;background:{{ c.avatarBg }};color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;">{{ c.initials }}</span>
+              <div style="min-width:0;"><div style="font-size:13px;font-weight:600;color:#211d16;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ c.name }}</div><div style="font-size:11px;color:#a8a39a;">{{ c.phone }}</div></div>
+            </div>
+            <span style="font-size:12.5px;color:#5c574d;">{{ c.interest }}</span>
+            <span><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:{{ c.opColor }};background:{{ c.opBg }};border:1px solid {{ c.opBorder }};padding:3px 9px;border-radius:999px;"><span style="width:5px;height:5px;border-radius:50%;background:{{ c.opDot }};"></span>{{ c.opLabel }}</span></span>
+            <span style="font-size:12.5px;color:#46413a;">{{ c.stage }}</span>
+            <span style="font-size:12px;color:#a8a39a;">{{ c.last }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ======================= OTHER (empty) ======================= -->
+  <sc-if value="{{ isOther }}">
+  <div style="flex:1;display:flex;align-items:center;justify-content:center;height:100vh;background:#f6f4ef;">
+    <div style="text-align:center;max-width:320px;">
+      <div style="width:58px;height:58px;border-radius:16px;background:#ebe8e1;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#a8a39a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M19.1 4.9l-2.8 2.8M7.7 16.3l-2.8 2.8"/></svg>
+      </div>
+      <div style="font-size:17px;font-weight:700;letter-spacing:-.01em;">{{ otherTitle }}</div>
+      <p style="margin:7px 0 18px;font-size:13px;color:#7c776c;line-height:1.5;">Este módulo es parte del alcance de Inmox y se diseñará en una siguiente iteración.</p>
+      <button onClick="{{ nav.go.inbox }}" style="border:none;background:#211d16;color:#fff;font-size:13px;font-weight:600;padding:9px 16px;border-radius:10px;cursor:pointer;" style-hover="background:#000">Volver a la bandeja</button>
+    </div>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  threadRef = React.createRef();
+
+  state = {
+    view: 'inbox',
+    selectedId: 'c1',
+    filter: 'todas',
+    search: '',
+    draft: '',
+    expanded: {},
+    propView: 'tarjetas',
+    propOp: 'todas',
+    propStatus: 'todas',
+    clientSearch: '',
+    leads: [
+      {id:'l1', client:'María Fernanda Ríos', prop:'Depto Álvaro Obregón 145', op:'venta', agent:'Carlos R.', ai:'CR', stage:'calificado'},
+      {id:'l2', client:'Jorge Medina', prop:'Casa Del Valle Sur', op:'renta', agent:'Ana L.', ai:'AL', stage:'contactado'},
+      {id:'l3', client:'Laura Beltrán', prop:'Depto Providencia 1010', op:'renta', agent:'Ana L.', ai:'AL', stage:'contactado'},
+      {id:'l4', client:'Familia Torres', prop:'Casa San Pedro Garza García', op:'venta', agent:'Carlos R.', ai:'CR', stage:'visita'},
+      {id:'l5', client:'Ricardo Solís', prop:'Depto Anatole France 70', op:'venta', agent:'Sin asignar', ai:'?', stage:'nuevo'},
+      {id:'l6', client:'Diana Cervantes', prop:'PH Masaryk Living', op:'venta', agent:'Carlos R.', ai:'CR', stage:'negociacion'},
+      {id:'l7', client:'Grupo Helio S.A.', prop:'Local Polanco Reforma', op:'renta', agent:'Ana L.', ai:'AL', stage:'documentacion'},
+      {id:'l8', client:'Sofía Marín', prop:'Casa Narvarte Poniente', op:'renta', agent:'Carlos R.', ai:'CR', stage:'calificado'},
+      {id:'l9', client:'Ernesto Lara', prop:'Depto Tonalá 88', op:'venta', agent:'Ana L.', ai:'AL', stage:'ganado'},
+      {id:'l10', client:'Beatriz Fonseca', prop:'Loft Colima 210', op:'venta', agent:'Carlos R.', ai:'CR', stage:'nuevo'},
+      {id:'l11', client:'Andrés Quintana', prop:'Casa San Pedro Garza García', op:'venta', agent:'Ana L.', ai:'AL', stage:'visita'}
+    ],
+    convs: [
+      {
+        id:'c1', name:'María Fernanda Ríos', firstName:'María Fernanda', initials:'MF', phone:'+52 55 1234 5678',
+        email:'mf.rios@gmail.com', op:'venta', prop:'Depto Roma Norte', time:'10:42', unread:false,
+        assigned:'Carlos R.', assignedInitials:'CR', stage:'Calificado', windowOpen:true,
+        lastMsg:'¿Sigue disponible el de Álvaro Obregón?',
+        reqs:['Compra','$4.5M – $6M','Roma Norte / Condesa','Departamento','2 recámaras','2 baños'],
+        notes:'Busca mudarse antes de septiembre. Trabaja en Reforma, prefiere algo a menos de 20 min. Pago de contado parcial + crédito Infonavit.',
+        messages:[
+          {type:'date', text:'Hoy'},
+          {type:'text', dir:'in', text:'Hola, vi el anuncio del depto en Roma Norte 🏙️', time:'10:21'},
+          {type:'text', dir:'out', text:'¡Hola María Fernanda! Claro, con gusto te ayudo. ¿Lo buscas para comprar?', time:'10:23', status:'read'},
+          {type:'text', dir:'in', text:'Sí, para comprar. Mi presupuesto es de unos 5 millones y quiero 2 recámaras', time:'10:28'},
+          {type:'text', dir:'out', text:'Perfecto, justo tengo varias opciones en Roma y Condesa en ese rango. Te comparto las mejores 👇', time:'10:30', status:'read'},
+          {type:'text', dir:'in', text:'¿Sigue disponible el de Álvaro Obregón?', time:'10:42'}
+        ],
+        matches:[
+          {pid:'p1', name:'Depto en Álvaro Obregón 145', op:'venta', priceStr:'$5,200,000 MXN', colonia:'Roma Norte', city:'CDMX', specs:'2 rec · 2 baños · 95 m² · 1 estac.', grad:'linear-gradient(135deg,#39414f,#66707e)', pct:96, why:'Encaja en presupuesto, zona exacta y distribución solicitada. Disponible y listo para mostrar. La opción más fuerte del inventario para este cliente.', reasons:[{ok:true,label:'Presupuesto'},{ok:true,label:'Roma Norte'},{ok:true,label:'2 recámaras'},{ok:true,label:'2 baños'},{ok:true,label:'Estacionamiento'}]},
+          {pid:'p3', name:'Depto Tonalá 88', op:'venta', priceStr:'$5,900,000 MXN', colonia:'Condesa', city:'CDMX', specs:'2 rec · 2 baños · 110 m² · 1 estac.', grad:'linear-gradient(135deg,#3f5852,#6f928c)', pct:88, why:'Más amplio y en zona colindante (Condesa). Precio en el tope alto del presupuesto, pero cumple distribución y metros de sobra.', reasons:[{ok:true,label:'2 recámaras'},{ok:true,label:'Condesa (colindante)'},{ok:true,label:'+ m²'},{ok:true,label:'Tope de presupuesto'}]},
+          {pid:'p2', name:'Loft Colima 210', op:'venta', priceStr:'$4,750,000 MXN', colonia:'Roma Norte', city:'CDMX', specs:'1 rec · 1 baño · 72 m² · 1 estac.', grad:'linear-gradient(135deg,#52504a,#9a958a)', pct:74, why:'Buena ubicación y precio cómodo, pero solo tiene 1 recámara cuando el cliente pidió 2. Útil como alternativa más económica.', reasons:[{ok:true,label:'Presupuesto'},{ok:true,label:'Roma Norte'},{bad:true,label:'Solo 1 recámara'}]}
+        ]
+      },
+      {
+        id:'c2', name:'Jorge Medina', firstName:'Jorge', initials:'JM', phone:'+52 55 9876 5432',
+        email:'jorge.medina@outlook.com', op:'renta', prop:'Casa Del Valle', time:'09:15', unread:true,
+        assigned:null, assignedInitials:'?', stage:'Nuevo', windowOpen:true,
+        lastMsg:'Gracias, lo reviso 🙏',
+        reqs:['Renta','$25k – $35k/mes','Del Valle / Narvarte','Casa','3 recámaras','2+ baños'],
+        notes:'Familia con dos hijos. Necesita estacionamiento para 2 autos y que acepten una mascota pequeña.',
+        messages:[
+          {type:'date', text:'Hoy'},
+          {type:'text', dir:'in', text:'Buenos días, busco casa en renta en Del Valle para mi familia', time:'09:02'},
+          {type:'text', dir:'out', text:'¡Hola Jorge! Con gusto. ¿Cuántas recámaras necesitas y cuál es tu presupuesto mensual?', time:'09:08', status:'read'},
+          {type:'text', dir:'in', text:'3 recámaras, hasta 35 mil al mes', time:'09:12'},
+          {type:'text', dir:'in', text:'Gracias, lo reviso 🙏', time:'09:15'}
+        ],
+        matches:[
+          {pid:'p4', name:'Casa en Del Valle Sur', op:'renta', priceStr:'$32,000 MXN/mes', colonia:'Del Valle', city:'CDMX', specs:'3 rec · 2.5 baños · 180 m² · 2 estac.', grad:'linear-gradient(135deg,#5f4d38,#a08a68)', pct:93, why:'Cumple zona, recámaras y presupuesto. Dos cajones de estacionamiento y patio; ideal para familia con mascota.', reasons:[{ok:true,label:'Del Valle'},{ok:true,label:'3 recámaras'},{ok:true,label:'Presupuesto'},{ok:true,label:'2 estac.'}]},
+          {pid:'p5', name:'Casa Narvarte Poniente', op:'renta', priceStr:'$27,500 MXN/mes', colonia:'Narvarte', city:'CDMX', specs:'3 rec · 2 baños · 150 m² · 1 estac.', grad:'linear-gradient(135deg,#6b5236,#a08a68)', pct:81, why:'Zona alterna aceptada y dentro de presupuesto, pero solo un cajón de estacionamiento (pidió 2 autos).', reasons:[{ok:true,label:'3 recámaras'},{ok:true,label:'Narvarte'},{ok:true,label:'Presupuesto'},{bad:true,label:'Solo 1 estac.'}]}
+        ]
+      },
+      {
+        id:'c3', name:'Laura Beltrán', firstName:'Laura', initials:'LB', phone:'+52 33 5544 3322',
+        email:'laura.b@gmail.com', op:'renta', prop:'Depto Providencia GDL', time:'Ayer', unread:true,
+        assigned:'Ana L.', assignedInitials:'AL', stage:'Contactado', windowOpen:false,
+        lastMsg:'¿Aceptan mascotas?',
+        reqs:['Renta','$15k – $20k/mes','Providencia, GDL','Departamento','2 recámaras'],
+        notes:'Reubicación por trabajo desde Monterrey. Tiene un gato. Ventana de 24 h cerrada — usar plantilla para reabrir.',
+        messages:[
+          {type:'date', text:'Ayer'},
+          {type:'text', dir:'in', text:'Hola, me interesa el depto en Providencia', time:'16:40'},
+          {type:'text', dir:'out', text:'¡Hola Laura! Sigue disponible. ¿Para cuándo lo necesitarías?', time:'16:52', status:'read'},
+          {type:'text', dir:'in', text:'¿Aceptan mascotas?', time:'17:10'}
+        ],
+        matches:[
+          {pid:'p6', name:'Depto Providencia 1010', op:'renta', priceStr:'$18,000 MXN/mes', colonia:'Providencia', city:'Guadalajara', specs:'2 rec · 2 baños · 88 m² · 1 estac.', grad:'linear-gradient(135deg,#5f4d38,#a08a68)', pct:90, why:'Zona y presupuesto exactos, pet-friendly. Falta confirmar fecha de disponibilidad con el propietario.', reasons:[{ok:true,label:'Providencia'},{ok:true,label:'Presupuesto'},{ok:true,label:'Acepta mascotas'},{ok:true,label:'2 recámaras'}]}
+        ]
+      },
+      {
+        id:'c4', name:'Familia Torres', firstName:'la familia Torres', initials:'FT', phone:'+52 81 2200 1100',
+        email:'torres.fam@gmail.com', op:'venta', prop:'Casa San Pedro MTY', time:'Lun', unread:false,
+        assigned:'Carlos R.', assignedInitials:'CR', stage:'Visita agendada', windowOpen:true,
+        lastMsg:'Quedamos para la visita el sábado',
+        reqs:['Compra','$9M – $13M','San Pedro, MTY','Casa','4 recámaras'],
+        notes:'Visita confirmada sábado 11:00. Vienen de fuera; necesitan apoyo con el proceso de crédito bancario.',
+        messages:[
+          {type:'date', text:'Lunes'},
+          {type:'text', dir:'out', text:'Les confirmo la visita a la casa de San Pedro para el sábado a las 11:00 🏡', time:'18:20', status:'read'},
+          {type:'text', dir:'in', text:'Quedamos para la visita el sábado', time:'18:45'}
+        ],
+        matches:[
+          {pid:'p7', name:'Casa San Pedro Garza García', op:'venta', priceStr:'$11,900,000 MXN', colonia:'Del Valle', city:'Monterrey', specs:'4 rec · 4.5 baños · 320 m² · 3 estac.', grad:'linear-gradient(135deg,#3f5852,#5a807c)', pct:94, why:'Visita ya agendada. Cumple recámaras, zona premium y presupuesto. Cliente con alta intención de compra.', reasons:[{ok:true,label:'San Pedro'},{ok:true,label:'4 recámaras'},{ok:true,label:'Presupuesto'},{ok:true,label:'Visita agendada'}]}
+        ]
+      },
+      {
+        id:'c5', name:'Ricardo Solís', firstName:'Ricardo', initials:'RS', phone:'+52 55 7788 9900',
+        email:'r.solis@gmail.com', op:'venta', prop:'Polanco', time:'08:30', unread:false,
+        assigned:null, assignedInitials:'?', stage:'Nuevo', windowOpen:true,
+        lastMsg:'Me interesa algo en Polanco',
+        reqs:['Compra','$8M – $13M','Polanco','Departamento','2-3 recámaras'],
+        notes:'Lead nuevo sin asignar. Inversionista; busca depto para rentar después.',
+        messages:[
+          {type:'date', text:'Hoy'},
+          {type:'text', dir:'in', text:'Me interesa algo en Polanco', time:'08:30'}
+        ],
+        matches:[
+          {pid:'p8', name:'Depto Anatole France 70', op:'venta', priceStr:'$9,800,000 MXN', colonia:'Polanco', city:'CDMX', specs:'2 rec · 2 baños · 130 m² · 2 estac.', grad:'linear-gradient(135deg,#39414f,#66707e)', pct:90, why:'Zona exacta y dentro de presupuesto. Buen perfil para inversión por su alta demanda de renta.', reasons:[{ok:true,label:'Polanco'},{ok:true,label:'Presupuesto'},{ok:true,label:'2 recámaras'}]},
+          {pid:'p9', name:'PH Masaryk Living', op:'venta', priceStr:'$12,500,000 MXN', colonia:'Polanco', city:'CDMX', specs:'3 rec · 3 baños · 175 m² · 2 estac.', grad:'linear-gradient(135deg,#3f5852,#6f928c)', pct:83, why:'Penthouse en tope de presupuesto. Más metros y amenidades; menor rendimiento de renta que la opción anterior.', reasons:[{ok:true,label:'Polanco'},{ok:true,label:'3 recámaras'},{ok:true,label:'Tope de presupuesto'}]}
+        ]
+      }
+    ]
+  };
+
+  opChip(op){
+    return op==='venta'
+      ? {label:'Venta', bg:'#eef4f1', color:'#126b60', border:'#cfe5dd', dot:'#1c9c8c'}
+      : {label:'Renta', bg:'#f6efdc', color:'#9a6a1a', border:'#e7d4a8', dot:'#c89233'};
+  }
+
+  setView(v){ this.setState({view:v}); }
+  selectConv(id){ this.setState({selectedId:id, expanded:{}, draft:''}); }
+  setFilter(f){ this.setState({filter:f}); }
+
+  send(){
+    const t=(this.state.draft||'').trim();
+    if(!t) return;
+    this.setState(s=>({
+      draft:'',
+      convs:s.convs.map(c=>c.id===s.selectedId
+        ? {...c, lastMsg:t, time:'ahora', messages:[...c.messages, {type:'text', dir:'out', text:t, time:'ahora', status:'sent'}]}
+        : c)
+    }));
+  }
+
+  sendTemplate(){
+    this.setState(s=>({
+      convs:s.convs.map(c=>c.id===s.selectedId
+        ? {...c, windowOpen:true, lastMsg:'Plantilla enviada', time:'ahora', messages:[...c.messages, {type:'text', dir:'out', text:'Hola 👋 Te recordamos tu visita agendada. ¿Sigue en pie? Responde para confirmar.', time:'ahora', status:'delivered'}]}
+        : c)
+    }));
+  }
+
+  sendProperty(pid){
+    this.setState(s=>{
+      const conv=s.convs.find(c=>c.id===s.selectedId);
+      const p=conv.matches.find(m=>m.pid===pid);
+      if(!p) return {};
+      const chip=this.opChip(p.op);
+      const msg={type:'property', dir:'out', time:'ahora', prop:{...p, opLabel:chip.label}};
+      return {convs:s.convs.map(c=>c.id===s.selectedId
+        ? {...c, lastMsg:'📋 '+p.name, time:'ahora', messages:[...c.messages, msg]}
+        : c)};
+    });
+  }
+
+  toggleMatch(pid){
+    this.setState(s=>({expanded:{...s.expanded, [pid]:!s.expanded[pid]}}));
+  }
+
+  setPropView(v){ this.setState({propView:v}); }
+  setPropOp(v){ this.setState({propOp:v}); }
+  setPropStatus(v){ this.setState({propStatus:v}); }
+
+  moveStage(id, dir){
+    const order=['nuevo','contactado','calificado','visita','documentacion','negociacion','ganado'];
+    this.setState(s=>({
+      leads:s.leads.map(l=>{
+        if(l.id!==id) return l;
+        const i=order.indexOf(l.stage);
+        const ni=Math.max(0, Math.min(order.length-1, i+dir));
+        return {...l, stage:order[ni]};
+      })
+    }));
+  }
+
+  scrollBottom(){
+    const el=this.threadRef.current;
+    if(el) el.scrollTop=el.scrollHeight;
+  }
+  componentDidMount(){ this.scrollBottom(); }
+  componentDidUpdate(prevProps, prevState){
+    if(!prevState || prevState.selectedId!==this.state.selectedId || prevState.convs!==this.state.convs) this.scrollBottom();
+  }
+
+  navStyles(view){
+    const on='background:#ffffff;color:#211d16;box-shadow:0 1px 2px rgba(0,0,0,.07);border:1px solid #e6e1d7;';
+    const off='background:transparent;color:#98938a;border:1px solid transparent;';
+    const f=(k)=> view===k?on:off;
+    const go=(k)=>()=>this.setView(k);
+    return {
+      dash:f('dashboard'), inbox:f('inbox'), props:f('props'), clients:f('clients'),
+      pipeline:f('pipeline'), visits:f('visits'), config:f('config'),
+      go:{dashboard:go('dashboard'), inbox:go('inbox'), props:go('props'), clients:go('clients'), pipeline:go('pipeline'), visits:go('visits'), config:go('config')}
+    };
+  }
+
+  renderVals(){
+    const s=this.state;
+    const me='Carlos R.';
+    const q=(s.search||'').toLowerCase();
+
+    const list=s.convs.filter(c=>{
+      if(s.filter==='unread' && !c.unread) return false;
+      if(s.filter==='mine' && c.assigned!==me) return false;
+      if(s.filter==='unassigned' && c.assigned) return false;
+      if(q && !((c.name||'').toLowerCase().includes(q) || (c.phone||'').includes(q) || (c.prop||'').toLowerCase().includes(q))) return false;
+      return true;
+    }).map(c=>{
+      const chip=this.opChip(c.op);
+      return {
+        id:c.id, name:c.name, initials:c.initials, time:c.time, prop:c.prop, lastMsg:c.lastMsg,
+        avatarBg: c.op==='venta'?'#126b60':'#9a6a1a',
+        rowBg: c.id===s.selectedId?'#efece5':'transparent',
+        accent: c.id===s.selectedId?chip.dot:'transparent',
+        nameWeight: c.unread?'700':'600',
+        msgColor: c.unread?'#2a261d':'#a8a39a',
+        timeColor: c.unread?'#2f9e62':'#a8a39a',
+        showUnread: !!c.unread,
+        opBg:chip.bg, opColor:chip.color, opBorder:chip.border, opDot:chip.dot, opLabel:chip.label,
+        onSelect: ()=>this.selectConv(c.id)
+      };
+    });
+
+    const conv=s.convs.find(c=>c.id===s.selectedId)||s.convs[0];
+    const chip=this.opChip(conv.op);
+
+    const messages=conv.messages.map(m=>{
+      if(m.type==='date') return {isDate:true, text:m.text};
+      if(m.type==='property') return {isProperty:true, justify:m.dir==='out'?'flex-end':'flex-start', time:m.time, prop:m.prop};
+      return {
+        isText:true, text:m.text, time:m.time,
+        justify:m.dir==='out'?'flex-end':'flex-start',
+        bubbleBg:m.dir==='out'?'#e9f0e7':'#ffffff',
+        bubbleBorder:m.dir==='out'?'#d3e0cf':'#e7e3da',
+        isRead:m.status==='read', isDelivered:m.status==='delivered', isSent:m.status==='sent'
+      };
+    });
+
+    const matches=conv.matches.map(m=>{
+      const exp=!!s.expanded[m.pid];
+      return {
+        name:m.name, colonia:m.colonia, city:m.city, priceStr:m.priceStr, specs:m.specs, grad:m.grad, why:m.why,
+        pctLabel:m.pct+'%', barWidth:m.pct+'%',
+        barColor: m.op==='venta'?'#1c9c8c':'#c89233',
+        pctColor: m.op==='venta'?'#126b60':'#9a6a1a',
+        expanded:exp,
+        toggleLabel: exp?'Ocultar':'¿Por qué?',
+        onSend: ()=>this.sendProperty(m.pid),
+        onToggle: ()=>this.toggleMatch(m.pid),
+        reasons:m.reasons.map(r=>({
+          label:r.label, ok:!!r.ok, bad:!!r.bad,
+          chipBg: r.ok?'#eef4f1':'#f6ecec',
+          chipColor: r.ok?'#126b60':'#a13b32',
+          chipBorder: r.ok?'#cfe5dd':'#e8cfc9'
+        }))
+      };
+    });
+
+    const filterDefs=[['todas','Todas'],['unread','Sin leer'],['mine','Asignadas a mí'],['unassigned','Sin asignar']];
+    const filters=filterDefs.map(([k,label])=>{
+      const active=s.filter===k;
+      return {label, onClick:()=>this.setFilter(k),
+        bg:active?'#211d16':'#ffffff', color:active?'#ffffff':'#5c574d', border:active?'#211d16':'#e6e1d7'};
+    });
+
+    const wOpen=conv.windowOpen;
+    const otherTitles={config:'Configuración'};
+
+    // ---------- INVENTORY ----------
+    const statusChip=(st)=> st==='disponible' ? {label:'Disponible', bg:'#eef4f1', color:'#126b60', dot:'#2f9e62'}
+      : st==='apartada' ? {label:'Apartada', bg:'#f6efdc', color:'#9a6a1a', dot:'#c89233'}
+      : {label:'Cerrada', bg:'#ebe8e1', color:'#7c776c', dot:'#a8a39a'};
+    const allProps=[
+      {id:'p1', name:'Depto Álvaro Obregón 145', op:'venta', type:'Departamento', priceStr:'$5,200,000', colonia:'Roma Norte', city:'CDMX', specs:'2 rec · 2 baños · 95 m²', status:'disponible', grad:'linear-gradient(135deg,#39414f,#66707e)'},
+      {id:'p3', name:'Depto Tonalá 88', op:'venta', type:'Departamento', priceStr:'$5,900,000', colonia:'Condesa', city:'CDMX', specs:'2 rec · 2 baños · 110 m²', status:'apartada', grad:'linear-gradient(135deg,#3f5852,#6f928c)'},
+      {id:'p2', name:'Loft Colima 210', op:'venta', type:'Departamento', priceStr:'$4,750,000', colonia:'Roma Norte', city:'CDMX', specs:'1 rec · 1 baño · 72 m²', status:'disponible', grad:'linear-gradient(135deg,#52504a,#9a958a)'},
+      {id:'p8', name:'Depto Anatole France 70', op:'venta', type:'Departamento', priceStr:'$9,800,000', colonia:'Polanco', city:'CDMX', specs:'2 rec · 2 baños · 130 m²', status:'disponible', grad:'linear-gradient(135deg,#39414f,#66707e)'},
+      {id:'p9', name:'PH Masaryk Living', op:'venta', type:'Penthouse', priceStr:'$12,500,000', colonia:'Polanco', city:'CDMX', specs:'3 rec · 3 baños · 175 m²', status:'apartada', grad:'linear-gradient(135deg,#3f5852,#6f928c)'},
+      {id:'p7', name:'Casa San Pedro Garza García', op:'venta', type:'Casa', priceStr:'$11,900,000', colonia:'Del Valle', city:'Monterrey', specs:'4 rec · 4.5 baños · 320 m²', status:'disponible', grad:'linear-gradient(135deg,#3f5852,#5a807c)'},
+      {id:'p4', name:'Casa en Del Valle Sur', op:'renta', type:'Casa', priceStr:'$32,000 /mes', colonia:'Del Valle', city:'CDMX', specs:'3 rec · 2.5 baños · 180 m²', status:'disponible', grad:'linear-gradient(135deg,#5f4d38,#a08a68)'},
+      {id:'p5', name:'Casa Narvarte Poniente', op:'renta', type:'Casa', priceStr:'$27,500 /mes', colonia:'Narvarte', city:'CDMX', specs:'3 rec · 2 baños · 150 m²', status:'disponible', grad:'linear-gradient(135deg,#6b5236,#a08a68)'},
+      {id:'p6', name:'Depto Providencia 1010', op:'renta', type:'Departamento', priceStr:'$18,000 /mes', colonia:'Providencia', city:'Guadalajara', specs:'2 rec · 2 baños · 88 m²', status:'cerrada', grad:'linear-gradient(135deg,#5f4d38,#a08a68)'},
+      {id:'p12', name:'Local Polanco Reforma', op:'renta', type:'Local', priceStr:'$55,000 /mes', colonia:'Polanco', city:'CDMX', specs:'120 m² · planta baja', status:'disponible', grad:'linear-gradient(135deg,#46413a,#7c776c)'}
+    ];
+    const properties=allProps.filter(p=>{
+      if(s.propOp!=='todas' && p.op!==s.propOp) return false;
+      if(s.propStatus!=='todas' && p.status!==s.propStatus) return false;
+      return true;
+    }).map(p=>{
+      const oc=this.opChip(p.op), sc=statusChip(p.status);
+      return {...p, opLabel:oc.label, opColor:oc.color, opBg:oc.bg, opBorder:oc.border, opDot:oc.dot,
+        statusLabel:sc.label, statusBg:sc.bg, statusColor:sc.color, statusDot:sc.dot};
+    });
+    const propOpFilters=[['todas','Todas'],['venta','Venta'],['renta','Renta']].map(([k,l])=>{
+      const a=s.propOp===k; return {label:l, onClick:()=>this.setPropOp(k), bg:a?'#211d16':'#fff', color:a?'#fff':'#5c574d', border:a?'#211d16':'#e6e1d7'};
+    });
+    const propStatusFilters=[['todas','Todos'],['disponible','Disponibles'],['apartada','Apartadas'],['cerrada','Cerradas']].map(([k,l])=>{
+      const a=s.propStatus===k; return {label:l, onClick:()=>this.setPropStatus(k), bg:a?'#211d16':'#fff', color:a?'#fff':'#5c574d', border:a?'#211d16':'#e6e1d7'};
+    });
+
+    // ---------- PIPELINE ----------
+    const stageDefs=[
+      {key:'nuevo', label:'Nuevo', color:'#9a958a'},
+      {key:'contactado', label:'Contactado', color:'#6b8cc4'},
+      {key:'calificado', label:'Calificado', color:'#1c9c8c'},
+      {key:'visita', label:'Visita agendada', color:'#c89233'},
+      {key:'documentacion', label:'Documentación', color:'#a394c9'},
+      {key:'negociacion', label:'En negociación', color:'#c97b86'},
+      {key:'ganado', label:'Ganado', color:'#2f9e62'}
+    ];
+    const pipelineColumns=stageDefs.map((st,ci)=>{
+      const cards=s.leads.filter(l=>l.stage===st.key).map(l=>{
+        const oc=this.opChip(l.op);
+        return {client:l.client, prop:l.prop, agent:l.agent, ai:l.ai, opLabel:oc.label, opDot:oc.dot, opColor:oc.color, opBg:oc.bg,
+          canPrev:ci>0, canNext:ci<stageDefs.length-1,
+          prevColor:ci>0?'#5c574d':'#cfc9bd', nextColor:ci<stageDefs.length-1?'#5c574d':'#cfc9bd',
+          onPrev:()=>this.moveStage(l.id,-1), onNext:()=>this.moveStage(l.id,1)};
+      });
+      return {label:st.label, color:st.color, count:cards.length, cards};
+    });
+
+    // ---------- VISITS ----------
+    const vChip=(st)=> st==='agendada' ? {label:'Agendada', bg:'#eef1f6', color:'#3a5a8c', dot:'#5a7fb0'}
+      : st==='realizada' ? {label:'Realizada', bg:'#eef4f1', color:'#126b60', dot:'#2f9e62'}
+      : st==='cancelada' ? {label:'Cancelada', bg:'#f6ecec', color:'#a13b32', dot:'#c0594e'}
+      : {label:'No-show', bg:'#ebe8e1', color:'#7c776c', dot:'#a8a39a'};
+    const visitsAll=[
+      {mon:'Jun', day:'14', who:'Familia Torres', prop:'Casa San Pedro Garza García', time:'Sáb · 11:00', agent:'Carlos R.', ai:'CR', op:'venta', status:'agendada'},
+      {mon:'Jun', day:'16', who:'Laura Beltrán', prop:'Depto Providencia 1010', time:'Lun · 17:30', agent:'Ana L.', ai:'AL', op:'renta', status:'agendada'},
+      {mon:'Jun', day:'17', who:'Jorge Medina', prop:'Casa Del Valle Sur', time:'Mar · 10:00', agent:'Sin asignar', ai:'?', op:'renta', status:'agendada'},
+      {mon:'Jun', day:'18', who:'Diana Cervantes', prop:'PH Masaryk Living', time:'Mié · 13:00', agent:'Carlos R.', ai:'CR', op:'venta', status:'agendada'},
+      {mon:'Jun', day:'12', who:'Ernesto Lara', prop:'Depto Tonalá 88', time:'Jue · 16:00', agent:'Ana L.', ai:'AL', op:'venta', status:'realizada'},
+      {mon:'Jun', day:'11', who:'Sofía Marín', prop:'Casa Narvarte Poniente', time:'Mié · 12:00', agent:'Carlos R.', ai:'CR', op:'renta', status:'cancelada'},
+      {mon:'Jun', day:'10', who:'Andrés Quintana', prop:'Casa San Pedro Garza García', time:'Mar · 18:00', agent:'Ana L.', ai:'AL', op:'venta', status:'no-show'}
+    ].map(v=>{ const c=vChip(v.status), oc=this.opChip(v.op); return {...v, sLabel:c.label, sBg:c.bg, sColor:c.color, sDot:c.dot, opDot:oc.dot}; });
+
+    // ---------- CLIENTS ----------
+    const cq=(s.clientSearch||'').toLowerCase();
+    const clientsAll=[
+      {name:'María Fernanda Ríos', phone:'+52 55 1234 5678', op:'venta', stage:'Calificado', interest:'Roma Norte · 2 rec', last:'Hoy'},
+      {name:'Jorge Medina', phone:'+52 55 9876 5432', op:'renta', stage:'Nuevo', interest:'Del Valle · Casa', last:'Hoy'},
+      {name:'Laura Beltrán', phone:'+52 33 5544 3322', op:'renta', stage:'Contactado', interest:'Providencia GDL', last:'Ayer'},
+      {name:'Familia Torres', phone:'+52 81 2200 1100', op:'venta', stage:'Visita agendada', interest:'San Pedro MTY · Casa', last:'Lun'},
+      {name:'Ricardo Solís', phone:'+52 55 7788 9900', op:'venta', stage:'Nuevo', interest:'Polanco · Depto', last:'Hoy'},
+      {name:'Diana Cervantes', phone:'+52 55 3311 2244', op:'venta', stage:'En negociación', interest:'Polanco · PH', last:'2 días'},
+      {name:'Sofía Marín', phone:'+52 55 6600 8800', op:'renta', stage:'Calificado', interest:'Narvarte · Casa', last:'3 días'}
+    ];
+    const clients=clientsAll.filter(c=>!cq || c.name.toLowerCase().includes(cq) || c.phone.includes(cq) || c.interest.toLowerCase().includes(cq))
+      .map(c=>{ const oc=this.opChip(c.op); return {...c, opLabel:oc.label, opColor:oc.color, opBg:oc.bg, opBorder:oc.border, opDot:oc.dot, initials:c.name.split(' ').slice(0,2).map(w=>w[0]).join(''), avatarBg:c.op==='venta'?'#126b60':'#9a6a1a'}; });
+
+    const activity=[
+      {who:'CR', bg:'#eef4f1', color:'#126b60', text:'Carlos asignó a Ana la conversación con Jorge Medina', time:'hace 5 min'},
+      {who:'AL', bg:'#f6efdc', color:'#9a6a1a', text:'Ana envió la ficha «Depto Providencia 1010» a Laura Beltrán', time:'hace 22 min'},
+      {who:'CR', bg:'#eef4f1', color:'#126b60', text:'Visita agendada: Familia Torres · Casa San Pedro · sáb 11:00', time:'hace 1 h'},
+      {who:'CR', bg:'#eef4f1', color:'#126b60', text:'María Fernanda Ríos pasó a etapa «Calificado»', time:'hace 2 h'},
+      {who:'WA', bg:'#e9f1ea', color:'#2f9e62', text:'Nuevo lead entrante por WhatsApp: Ricardo Solís (Polanco)', time:'hace 3 h'}
+    ];
+    const visits=[
+      {mon:'Jun', day:'14', who:'Familia Torres', prop:'Casa San Pedro Garza García', time:'11:00', agent:'Carlos'},
+      {mon:'Jun', day:'16', who:'Laura Beltrán', prop:'Depto Providencia 1010', time:'17:30', agent:'Ana'},
+      {mon:'Jun', day:'17', who:'Jorge Medina', prop:'Casa Del Valle Sur', time:'10:00', agent:'Sin asignar'}
+    ];
+
+    return {
+      view:s.view,
+      isInbox:s.view==='inbox',
+      isDashboard:s.view==='dashboard',
+      isProps:s.view==='props', isClients:s.view==='clients', isPipeline:s.view==='pipeline', isVisits:s.view==='visits',
+      isOther:s.view==='config',
+      otherTitle:otherTitles[s.view]||'',
+      properties, propView:s.propView, isCards:s.propView==='tarjetas', isTable:s.propView==='tabla',
+      propOpFilters, propStatusFilters,
+      cardsViewBg: s.propView==='tarjetas'?'#211d16':'#fff', cardsViewColor: s.propView==='tarjetas'?'#fff':'#5c574d',
+      tableViewBg: s.propView==='tabla'?'#211d16':'#fff', tableViewColor: s.propView==='tabla'?'#fff':'#5c574d',
+      setCards:()=>this.setPropView('tarjetas'), setTable:()=>this.setPropView('tabla'),
+      pipelineColumns,
+      visitsAll,
+      clients, clientSearch:s.clientSearch, onClientSearch:(e)=>this.setState({clientSearch:e.target.value}),
+      nav:this.navStyles(s.view),
+      list, filters, filter:s.filter, search:s.search, draft:s.draft,
+      conv, reqChips:conv.reqs,
+      convInitialsBg: conv.op==='venta'?'#126b60':'#9a6a1a',
+      convChipBg:chip.bg, convChipColor:chip.color, convChipBorder:chip.border, convChipDot:chip.dot, convChipLabel:chip.label,
+      messages, matches,
+      threadRef:this.threadRef,
+      showComposer:wOpen, showTemplateComposer:!wOpen,
+      windowStripBg: wOpen?'#f1f5f2':'#f7f1e3',
+      windowDot: wOpen?'#2f9e62':'#c89233',
+      windowColor: wOpen?'#2f7d4f':'#9a6a1a',
+      windowText: wOpen?'Ventana de 24 h abierta':'Ventana de 24 h cerrada',
+      windowSub: wOpen?'· cierra en 4 h 12 min':'· requiere plantilla',
+      onSearch:(e)=>this.setState({search:e.target.value}),
+      onDraft:(e)=>this.setState({draft:e.target.value}),
+      onKey:(e)=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); this.send(); } },
+      send:()=>this.send(),
+      sendTemplate:()=>this.sendTemplate(),
+      activity, visits
+    };
+  }
+}
+</script>
+</body>
+</html>

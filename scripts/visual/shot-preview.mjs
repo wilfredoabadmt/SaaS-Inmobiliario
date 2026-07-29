@@ -1,0 +1,16 @@
+import { chromium } from "@playwright/test";
+import { join } from "node:path";
+import { mkdirSync } from "node:fs";
+const BASE = process.env.BASE_URL || "http://localhost:3000";
+mkdirSync(join("scripts","visual","out"), { recursive: true });
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+const errs = [];
+page.on("pageerror", e => errs.push(String(e)));
+const resp = await page.goto(`${BASE}/dev-preview/inbox`, { waitUntil: "networkidle" });
+await page.waitForTimeout(1500);
+console.log("status:", resp?.status(), "url:", page.url());
+if (errs.length) console.log("PAGE ERRORS:", errs.join(" | "));
+await page.screenshot({ path: join("scripts","visual","out","inbox-preview.png") });
+console.log("saved inbox-preview.png");
+await browser.close();

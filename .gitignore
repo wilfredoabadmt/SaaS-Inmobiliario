@@ -1,0 +1,37 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# next.js
+/.next/
+/out/
+next-env.d.ts
+
+# production
+/build
+/dist
+
+# env / secrets (Principio I â€” nunca commitear)
+.env
+.env.*
+!.env.example
+
+# testing
+/coverage
+
+# misc
+*.log
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.vscode/
+.idea/
+
+# --- Estado efímero de agentes (no versionar) ---
+.agents/
+.claude/agent-memory/
+.claude/**/cache/
+*.log
+.tmp/
