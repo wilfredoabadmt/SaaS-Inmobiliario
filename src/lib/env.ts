@@ -78,9 +78,9 @@ const envSchema = z.object({
   S3_ACCESS_KEY_ID: z.string().min(1),
   S3_SECRET_ACCESS_KEY: z.string().min(1),
   S3_FORCE_PATH_STYLE: z
-    .enum(["true", "false"])
+    .string()
     .default("true")
-    .transform((v) => v === "true"),
+    .transform((v) => v === "true" || v === "1"),
 });
 
 export type Env = z.infer<typeof envSchema>;
@@ -113,6 +113,7 @@ const BUILD_PLACEHOLDERS: Record<string, string> = {
   S3_BUCKET: "build",
   S3_ACCESS_KEY_ID: "build",
   S3_SECRET_ACCESS_KEY: "build",
+  S3_FORCE_PATH_STYLE: "false",
 };
 
 export function getEnv(): Env {
