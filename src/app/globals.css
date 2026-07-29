@@ -129,3 +129,73 @@ body {
 .animate-pulse-dot {
   animation: inmox-pulse 2s ease-in-out infinite;
 }
+
+/* Glassmorphism & Liquid Glass Styles (SaaS TOI Visual Theme) */
+.liquid-glass {
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card-dark {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-card-dark:hover {
+  border-color: rgba(13, 148, 136, 0.4);
+  box-shadow: 0 10px 30px rgba(13, 148, 136, 0.15);
+}
+
+.glossy-blue-btn {
+  background: linear-gradient(135deg, #0d9488 0%, #00e5ff 100%);
+  color: #000000;
+  font-weight: 800;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+  transition: all 0.2s ease;
+}
+
+.glossy-blue-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.6);
+}
+
+.glossy-pill-btn {
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 10px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.glossy-pill-btn:hover {
+  background-color: #f1f5f9;
+  transform: translateY(-1px);
+}
+
+.glass-input-dark {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.glass-input-dark:focus {
+  border-color: #00e5ff;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.25);
+}
+
+.glass-badge-info {
+  background: rgba(13, 148, 136, 0.15);
+  border: 1px solid rgba(13, 148, 136, 0.3);
+  color: #00e5ff;
+  border-radius: 9999px;
+  font-weight: 600;
+}
