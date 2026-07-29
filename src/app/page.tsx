@@ -1,13 +1,7 @@
+"use client";
+
 import Link from "next/link";
 import { SessionRedirect } from "@/components/public/session-redirect";
-
-export const dynamic = "force-dynamic";
-
-export const metadata = {
-  title: "Inmox — CRM Inmobiliario Multi-Tenant con WhatsApp e IA",
-  description:
-    "Plataforma multi-tenant de gestión inmobiliaria, automatización por WhatsApp Cloud API, Instagram, Google Calendar y Agente de IA.",
-};
 
 export default function HomePage() {
   return (
