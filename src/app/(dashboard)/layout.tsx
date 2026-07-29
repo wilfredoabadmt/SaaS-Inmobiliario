@@ -24,12 +24,12 @@ export default async function DashboardLayout({
         {/* Logo de marca */}
         <Link
           href="/inicio"
-          aria-label="Inmox — Inicio"
+          aria-label="Homya — Inicio"
           className="mb-4 flex h-[38px] w-[38px] items-center justify-center overflow-hidden rounded-[10px] shadow-rest"
         >
           <Image
-            src="/inmox-logo.png"
-            alt="Inmox"
+            src="/homya-logo.png"
+            alt="Homya"
             width={38}
             height={38}
             className="h-full w-full object-cover"

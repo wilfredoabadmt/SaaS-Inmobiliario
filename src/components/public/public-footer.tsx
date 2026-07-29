@@ -17,7 +17,7 @@ export function PublicFooter() {
               href="/"
               className="text-base font-[650] text-accent-text hover:text-accent transition-colors"
             >
-              Inmox
+              Homya
             </Link>
             <p className="mt-1 text-xs text-text-3">
               CRM inmobiliario con WhatsApp como canal principal.
@@ -56,7 +56,7 @@ export function PublicFooter() {
         </div>
 
         <p className="mt-6 text-center text-xs text-text-4">
-          &copy; {year} Inmox. Todos los derechos reservados.
+          &copy; {year} Homya. Todos los derechos reservados.
         </p>
       </div>
     </footer>

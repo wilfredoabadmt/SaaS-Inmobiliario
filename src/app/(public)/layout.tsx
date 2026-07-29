@@ -18,9 +18,9 @@ export default function PublicLayout({
           <Link
             href="/"
             className="text-base font-[650] text-accent-text hover:text-accent transition-colors"
-            aria-label="Inmox — inicio"
+            aria-label="Homya — inicio"
           >
-            Inmox
+            Homya
           </Link>
           <Link
             href="/login"

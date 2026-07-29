@@ -55,7 +55,7 @@ async function complete(opts: ChatOpts): Promise<string> {
         "Content-Type": "application/json",
         // Atribución recomendada por OpenRouter (no son secretos).
         "HTTP-Referer": env.APP_BASE_URL,
-        "X-Title": "Inmox",
+        "X-Title": "Homya",
       },
       body: JSON.stringify({
         model: opts.model,

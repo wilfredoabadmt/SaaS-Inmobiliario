@@ -4,9 +4,9 @@ import { LegalNotice } from "@/components/public/legal-notice";
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "Términos y condiciones — Inmox",
+  title: "Términos y condiciones — Homya",
   description:
-    "Términos de uso del servicio Inmox: CRM inmobiliario con WhatsApp como canal principal.",
+    "Términos de uso del servicio Homya: CRM inmobiliario con WhatsApp como canal principal.",
 };
 
 export default function TerminosPage() {
@@ -19,7 +19,7 @@ export default function TerminosPage() {
         </h1>
         <p className="mt-3 text-base text-[#56565e]">
           Estos Términos y condiciones regulan el acceso y uso de{" "}
-          <strong>Inmox</strong>, un CRM inmobiliario en modalidad SaaS (Software
+          <strong>Homya</strong>, un CRM inmobiliario en modalidad SaaS (Software
           como Servicio) con WhatsApp como canal principal de comunicación. Al
           acceder o usar la plataforma, aceptas estos Términos en su totalidad.
         </p>

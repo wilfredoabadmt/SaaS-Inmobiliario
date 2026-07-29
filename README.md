@@ -1,6 +1,6 @@
-# Inmox — CRM inmobiliario multi-tenant con WhatsApp
+# Homya — CRM inmobiliario multi-tenant con WhatsApp
 
-Inmox es un CRM para agencias inmobiliarias (multi-tenant: cada agencia es una
+Homya es un CRM para agencias inmobiliarias (multi-tenant: cada agencia es una
 organización aislada) con **WhatsApp como canal principal** de atención: bandeja
 unificada, agente de IA con matching propiedad↔cliente, catálogo de propiedades,
 pipeline de ventas, agendado de visitas con Google Calendar, plantillas de WhatsApp,

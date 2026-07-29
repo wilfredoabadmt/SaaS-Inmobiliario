@@ -287,7 +287,7 @@ export function TemplateBuilder({
       {/* Pie */}
       <div className="mt-4">
         <label className={LABEL_CLS}>Pie (opcional)</label>
-        <Input value={footer} onChange={(e) => setFooter(e.target.value)} className="mt-1 h-9" placeholder="Inmox" />
+        <Input value={footer} onChange={(e) => setFooter(e.target.value)} className="mt-1 h-9" placeholder="Homya" />
       </div>
 
       {/* Botones */}

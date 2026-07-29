@@ -54,7 +54,7 @@ export function renderShowingMail(d: ShowingMailData): {
       <tr><td style="color:#64748b;padding-right:12px">Cuándo</td><td>${d.whenLabel}</td></tr>
     </table>
     ${button}
-    <p style="color:#94a3b8;font-size:12px;margin-top:24px">Inmox · gestión de visitas</p>
+    <p style="color:#94a3b8;font-size:12px;margin-top:24px">Homya · gestión de visitas</p>
   </div>`;
 
   return { subject, html, text };
@@ -77,9 +77,9 @@ export function renderInvitationMail(d: InvitationMailData): {
   html: string;
   text: string;
 } {
-  const subject = `${d.inviterName} te invitó a ${d.agencyName} en Inmox`;
+  const subject = `${d.inviterName} te invitó a ${d.agencyName} en Homya`;
   const text = [
-    `${d.inviterName} te invitó a unirte a ${d.agencyName} como ${d.roleLabel} en Inmox.`,
+    `${d.inviterName} te invitó a unirte a ${d.agencyName} como ${d.roleLabel} en Homya.`,
     ``,
     `Acepta la invitación aquí:`,
     d.acceptUrl,
@@ -90,7 +90,7 @@ export function renderInvitationMail(d: InvitationMailData): {
     <h2 style="font-size:18px;margin:0 0 12px">Te invitaron a ${d.agencyName}</h2>
     <p style="font-size:14px;line-height:1.6;margin:0 0 4px">
       <strong>${d.inviterName}</strong> te invitó a unirte a <strong>${d.agencyName}</strong>
-      como <strong>${d.roleLabel}</strong> en Inmox.
+      como <strong>${d.roleLabel}</strong> en Homya.
     </p>
     <p style="margin:20px 0">
       <a href="${d.acceptUrl}" style="background:#0f172a;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none;font-size:14px">Aceptar invitación</a>
@@ -98,7 +98,7 @@ export function renderInvitationMail(d: InvitationMailData): {
     <p style="color:#94a3b8;font-size:12px;margin-top:8px">
       Si el botón no funciona, copia y pega este enlace:<br />${d.acceptUrl}
     </p>
-    <p style="color:#94a3b8;font-size:12px;margin-top:24px">Inmox · gestión inmobiliaria</p>
+    <p style="color:#94a3b8;font-size:12px;margin-top:24px">Homya · gestión inmobiliaria</p>
   </div>`;
 
   return { subject, html, text };

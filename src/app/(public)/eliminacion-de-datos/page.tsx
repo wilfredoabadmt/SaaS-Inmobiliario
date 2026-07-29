@@ -4,9 +4,9 @@ import { LegalNotice } from "@/components/public/legal-notice";
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "Eliminación de datos — Inmox",
+  title: "Eliminación de datos — Homya",
   description:
-    "Cómo solicitar la eliminación de tus datos personales en Inmox, conforme a los requisitos de Meta/WhatsApp.",
+    "Cómo solicitar la eliminación de tus datos personales en Homya, conforme a los requisitos de Meta/WhatsApp.",
 };
 
 export default function EliminacionDeDatosPage() {
@@ -18,7 +18,7 @@ export default function EliminacionDeDatosPage() {
           Solicitud de eliminación de datos
         </h1>
         <p className="mt-3 text-base text-[#56565e]">
-          Esta página explica cómo los usuarios de <strong>Inmox</strong> y sus
+          Esta página explica cómo los usuarios de <strong>Homya</strong> y sus
           clientes finales pueden solicitar la eliminación de sus datos
           personales de la plataforma, conforme a los requisitos de la{" "}
           <a

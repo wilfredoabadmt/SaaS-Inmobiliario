@@ -4,9 +4,9 @@ import { LegalNotice } from "@/components/public/legal-notice";
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "Política de privacidad — Inmox",
+  title: "Política de privacidad — Homya",
   description:
-    "Cómo Inmox recolecta, usa y protege los datos personales de sus usuarios y sus clientes finales.",
+    "Cómo Homya recolecta, usa y protege los datos personales de sus usuarios y sus clientes finales.",
 };
 
 export default function PrivacidadPage() {
@@ -18,7 +18,7 @@ export default function PrivacidadPage() {
           Política de privacidad
         </h1>
         <p className="mt-3 text-base text-[#56565e]">
-          Esta política describe cómo <strong>Inmox</strong> (en adelante
+          Esta política describe cómo <strong>Homya</strong> (en adelante
           &ldquo;la plataforma&rdquo;, &ldquo;nosotros&rdquo;) recolecta, usa,
           almacena y protege los datos personales de los usuarios de la
           plataforma (agentes y agencias inmobiliarias) y de sus clientes

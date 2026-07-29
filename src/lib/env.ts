@@ -69,7 +69,7 @@ const envSchema = z.object({
   SMTP_USER: z.string().default(""),
   SMTP_PASS: z.string().default(""),
   SMTP_FROM: z.string().default(""),
-  MAIL_FROM_NAME: z.string().default("Inmox"),
+  MAIL_FROM_NAME: z.string().default("Homya"),
 
   // Almacenamiento de objetos (interfaz S3 estándar)
   S3_ENDPOINT: z.string().url(),

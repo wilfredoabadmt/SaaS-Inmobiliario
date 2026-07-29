@@ -132,7 +132,7 @@ export default function HomePage() {
                       fontSize: "1.1rem",
                     }}
                   >
-                    I
+                    H
                   </div>
                   <span
                     style={{
@@ -142,7 +142,7 @@ export default function HomePage() {
                       color: "#FFFFFF",
                     }}
                   >
-                    Inmox
+                    Homya
                   </span>
                 </Link>
 
@@ -676,7 +676,7 @@ export default function HomePage() {
             <h2 style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.25rem)", fontWeight: 900, color: "#F8FAFC", letterSpacing: "-0.03em", marginBottom: "0.75rem" }}>
               Preguntas Frecuentes
             </h2>
-            <p style={{ fontSize: "1rem", color: "#94A3B8" }}>Resuelve tus dudas sobre las capacidades y funcionamiento de Inmox</p>
+            <p style={{ fontSize: "1rem", color: "#94A3B8" }}>Resuelve tus dudas sobre las capacidades y funcionamiento de Homya</p>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
@@ -694,7 +694,7 @@ export default function HomePage() {
                 ¿Requiero aprobación de Meta para usar WhatsApp Cloud API?
               </h3>
               <p style={{ fontSize: "0.88rem", color: "#94A3B8", lineHeight: 1.6 }}>
-                Inmox incluye la integración oficial mediante Embedded Signup. Cada agencia conecta su propio número oficial de WhatsApp en menos de 5 minutos sin compartir contraseñas.
+                Homya incluye la integración oficial mediante Embedded Signup. Cada agencia conecta su propio número oficial de WhatsApp en menos de 5 minutos sin compartir contraseñas.
               </p>
             </div>
 
@@ -890,7 +890,7 @@ export default function HomePage() {
                 Contacto Directo
               </h2>
               <p style={{ fontSize: "0.88rem", color: "#94A3B8", marginBottom: "1.5rem", lineHeight: 1.5 }}>
-                ¿Tienes dudas específicas sobre Inmox? Nuestro equipo técnico y comercial responde en menos de 24 horas.
+                ¿Tienes dudas específicas sobre Homya? Nuestro equipo técnico y comercial responde en menos de 24 horas.
               </p>
               <form onSubmit={(e) => e.preventDefault()} style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
                 <input
@@ -964,9 +964,9 @@ export default function HomePage() {
                       fontSize: "1rem",
                     }}
                   >
-                    I
+                    H
                   </div>
-                  <span style={{ fontSize: "1.1rem", fontWeight: 800, color: "#F8FAFC" }}>Inmox</span>
+                  <span style={{ fontSize: "1.1rem", fontWeight: 800, color: "#F8FAFC" }}>Homya</span>
                 </div>
                 <p style={{ fontSize: "0.85rem", color: "#94A3B8", lineHeight: 1.6, marginBottom: "1rem" }}>
                   Desarrollado para TELECOMUNICACIONES OPORTUNAS INTELIGENTES S.R.L. Plataforma integral de CRM inmobiliario multi-tenant y automatización por WhatsApp Cloud API.

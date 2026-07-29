@@ -3,12 +3,12 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Inmox — CRM Inmobiliario con WhatsApp",
+  title: "Homya — CRM Inmobiliario con WhatsApp",
   description: "CRM inmobiliario multi-tenant con WhatsApp como canal principal. Gestiona renta y venta desde una bandeja unificada.",
   icons: {
-    icon: "/inmox-logo.png",
-    shortcut: "/inmox-logo.png",
-    apple: "/inmox-logo.png",
+    icon: "/homya-logo.png",
+    shortcut: "/homya-logo.png",
+    apple: "/homya-logo.png",
   },
 };
 
