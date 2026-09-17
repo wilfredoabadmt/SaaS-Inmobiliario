@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { ExternalLink, MessageSquare, X } from "lucide-react";
 import { AssignAgent } from "@/components/pipeline/assign-agent";
+import { CandidateDocumentsPanel } from "@/components/documents/candidate-documents-panel";
+import { ContractTracker } from "@/components/contracts/contract-tracker";
 import type { DealDetail, OrgMember } from "@/lib/pipeline/types";
 
 /**
@@ -157,6 +159,16 @@ export function DealDrawer({
               >
                 <MessageSquare size={14} /> Abrir en bandeja
               </a>
+            </section>
+
+            {/* Expediente de Documentos (Feature 015) */}
+            <section className="border-t border-border pt-4">
+              <CandidateDocumentsPanel candidacyId={detail.id} />
+            </section>
+
+            {/* Contratos (Feature 015) */}
+            <section className="border-t border-border pt-4">
+              <ContractTracker candidacyId={detail.id} />
             </section>
           </div>
         )}

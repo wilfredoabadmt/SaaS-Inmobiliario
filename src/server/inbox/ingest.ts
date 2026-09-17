@@ -3,12 +3,14 @@ import { and, desc, eq, sql } from "drizzle-orm";
 import { getDb } from "@/lib/db";
 import { newId } from "@/lib/db/ids";
 import { candidacy, client, conversation, message } from "@/lib/db/schema/domain";
-import type { WhatsAppChangeValue } from "@/lib/meta";
+import { downloadMediaBinary, fetchMediaUrl, type WhatsAppChangeValue } from "@/lib/meta";
 import { scheduleAgentRun } from "@/server/ai/coalesce";
+import { transcribeAudio } from "@/server/ai/stt";
 import { handleButtonReply } from "@/server/inbox/buttons";
 import { getOrCreateConversation } from "@/server/inbox/conversations";
 import { sendAgentAskForText } from "@/server/inbox/send";
 import { resolveInitialStage } from "@/server/pipeline/stages";
+import { getSendingCredentials } from "@/server/whatsapp/credentials";
 
 /**
  * Procesa un `value` del webhook de WhatsApp de forma **idempotente** (Principio IV /
@@ -84,11 +86,68 @@ export async function processWebhookValue(
       if (msg.type === "text" && msg.text?.body?.trim()) {
         // Texto: coalescencia de ráfaga → una sola respuesta del agente (RB-3).
         after(() => scheduleAgentRun(organizationId, conv.id));
+      } else if (
+        (msg.type === "audio" || msg.type === "voice") &&
+        (msg.audio?.id || msg.voice?.id) &&
+        inserted[0]?.id
+      ) {
+        // Nota de voz: transcribe con IA y alimenta el pipeline conversacional (Feature 018).
+        const mediaId = (msg.audio?.id ?? msg.voice?.id)!;
+        const insertedMsgId = inserted[0].id;
+        after(() => handleAudioInbound(organizationId, conv.id, insertedMsgId, mediaId, msg.from));
       } else {
-        // No-texto (audio/imagen/ubicación/…): el agente no lo interpreta (RB-2).
+        // No-texto (imagen/ubicación/…): el agente no lo interpreta (RB-2).
         after(() => handleNonTextInbound(organizationId, conv.id, msg.from));
       }
     }
+  }
+}
+
+/**
+ * Procesa una nota de voz de WhatsApp entrante (Feature 018).
+ * Descarga el binario desde Meta Cloud API, lo transcribe vía OpenRouter multimodal y actualiza
+ * el cuerpo del mensaje como `[Nota de voz]: <transcripción>`.
+ * Si tiene éxito, programa la respuesta del Agente IA.
+ * Si falla o es inaudible, delega a `handleNonTextInbound`.
+ */
+async function handleAudioInbound(
+  organizationId: string,
+  conversationId: string,
+  messageId: string,
+  mediaId: string,
+  waContactPhone: string,
+): Promise<void> {
+  try {
+    const creds = await getSendingCredentials(organizationId);
+    if (!creds?.token) {
+      console.warn(`[ingest] Sin credenciales para descargar audio ${mediaId} en org ${organizationId}`);
+      await handleNonTextInbound(organizationId, conversationId, waContactPhone);
+      return;
+    }
+
+    const mediaInfo = await fetchMediaUrl(mediaId, creds.token);
+    const { buffer, contentType } = await downloadMediaBinary(mediaInfo.url, creds.token);
+    const transcript = await transcribeAudio(buffer, contentType || mediaInfo.mimeType || "audio/ogg");
+
+    if (transcript && transcript.trim()) {
+      const db = getDb();
+      const formattedBody = `[Nota de voz]: ${transcript.trim()}`;
+      await db
+        .update(message)
+        .set({ body: formattedBody })
+        .where(and(eq(message.id, messageId), eq(message.organizationId, organizationId)));
+
+      // Dispara la ejecución del Agente IA con el texto transcrito
+      scheduleAgentRun(organizationId, conversationId);
+    } else {
+      await handleNonTextInbound(organizationId, conversationId, waContactPhone);
+    }
+  } catch (err) {
+    console.error(
+      `[ingest] Error procesando nota de voz ${mediaId} en ${conversationId}:`,
+      err instanceof Error ? err.message : String(err),
+    );
+    await handleNonTextInbound(organizationId, conversationId, waContactPhone);
   }
 }
 

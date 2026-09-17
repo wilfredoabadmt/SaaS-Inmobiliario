@@ -10,6 +10,7 @@ import { buildTextPayload, graphRequest, MetaApiError } from "@/lib/meta";
 import { toPropertyView } from "@/server/matching/engine";
 import { resolveMainPhotoUrls } from "@/server/properties/photos";
 import { getSendingCredentials } from "@/server/whatsapp/credentials";
+import { advanceClientDeal } from "@/server/pipeline/stages";
 
 export const dynamic = "force-dynamic";
 
@@ -170,6 +171,8 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     })
     .returning({ id: message.id });
   await getDb().update(conversation).set({ lastMessageAt: now }).where(eq(conversation.id, id));
+  // Auto-avance del trato a "Contactado" (Feature 017)
+  void advanceClientDeal(organizationId, conv.clientId, "contactado");
 
   return Response.json({ id: inserted[0]?.id, status: "sent" }, { status: 201 });
 }

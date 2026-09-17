@@ -117,6 +117,55 @@ export async function advanceStageForward(
   }
 }
 
+/**
+ * Resuelve el ID de una etapa buscando por kind o coincidencia de texto en label (Feature 017).
+ */
+export async function resolveStageByKindOrLabel(
+  organizationId: string,
+  query: string,
+): Promise<string | null> {
+  const db = getDb();
+  await seedDefaultStages(organizationId);
+
+  const stages = await db
+    .select({ id: pipelineStage.id, label: pipelineStage.label, kind: pipelineStage.kind })
+    .from(pipelineStage)
+    .where(eq(pipelineStage.organizationId, organizationId));
+
+  const q = query.toLowerCase().trim();
+  const byKind = stages.find((s) => s.kind === q);
+  if (byKind) return byKind.id;
+
+  const byLabel = stages.find((s) => s.label.toLowerCase().includes(q));
+  if (byLabel) return byLabel.id;
+
+  return null;
+}
+
+/**
+ * Localiza el trato del cliente y lo avanza hacia targetQuery respetando la regla forward-only (Feature 017).
+ */
+export async function advanceClientDeal(
+  organizationId: string,
+  clientId: string,
+  targetQuery: string,
+): Promise<void> {
+  const db = getDb();
+  const targetStageId = await resolveStageByKindOrLabel(organizationId, targetQuery);
+  if (!targetStageId) return;
+
+  const deals = await db
+    .select({ id: candidacy.id })
+    .from(candidacy)
+    .where(and(eq(candidacy.organizationId, organizationId), eq(candidacy.clientId, clientId)))
+    .limit(1);
+
+  const deal = deals[0];
+  if (!deal) return;
+
+  await advanceStageForward(organizationId, deal.id, targetStageId);
+}
+
 // ---------- Configuración de etapas (US2, solo owner) ----------
 
 export type StageWriteResult =

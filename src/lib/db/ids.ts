@@ -22,6 +22,7 @@ export const ID_PREFIXES = {
   googleCalendarCredentials: "gcal",
   document: "doc",
   contract: "ctr",
+  subscription: "sub",
   metaCredentials: "wamc",
   instagramCredentials: "igc",
   instagramPost: "igp",

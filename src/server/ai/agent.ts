@@ -27,6 +27,7 @@ import {
 import { computeAvailability } from "@/server/calendar/availability";
 import { listActiveShowingsForClient } from "@/server/showings/queries";
 import { labelInTz } from "@/lib/time/slots";
+import { advanceClientDeal } from "@/server/pipeline/stages";
 
 // La salida del LLM varía de formato. Validamos LAXO (reply string + objetos) y
 // normalizamos en JS plano a tipos estrictos (control total, sin sorpresas de inferencia).
@@ -44,6 +45,7 @@ const ACTION_TYPES = [
   "schedule_visit",
   "reschedule_visit",
   "cancel_visit",
+  "advance_stage",
   "handoff",
 ] as const;
 type AgentAction = {
@@ -51,6 +53,7 @@ type AgentAction = {
   propertyId: string | null;
   showingId: string | null;
   whenISO: string | null;
+  stage: string | null;
   reason: string | null;
 };
 
@@ -92,6 +95,7 @@ function normalizeAction(raw: Record<string, unknown> | null | undefined): Agent
     propertyId: asStr(o.propertyId ?? params.propertyId ?? params.property_id) ?? null,
     showingId: asStr(o.showingId ?? params.showingId ?? params.showing_id) ?? null,
     whenISO: asStr(o.whenISO ?? o.when ?? params.whenISO ?? params.when) ?? null,
+    stage: asStr(o.stage ?? o.targetStage ?? params.stage ?? params.targetStage) ?? null,
     reason: asStr(o.reason ?? params.reason) ?? null,
   };
 }
@@ -275,12 +279,18 @@ export async function runAgentForInboundMessage(args: {
     const reqPatch = normalizeRequirements(out.requirements);
     if (Object.values(reqPatch).some((v) => v != null)) {
       await upsertRequirements(organizationId, conv.clientId, reqPatch, "ai");
+      // Auto-avance a Calificado (Feature 017)
+      void advanceClientDeal(organizationId, conv.clientId, "calificado");
     }
 
     const convRef = { id: conv.id, waContactPhone: conv.waContactPhone };
 
     // 2) Respuesta al cliente.
-    if (out.reply?.trim()) await sendAgentText(organizationId, convRef, out.reply.trim());
+    if (out.reply?.trim()) {
+      await sendAgentText(organizationId, convRef, out.reply.trim());
+      // Auto-avance a Contactado (Feature 017)
+      void advanceClientDeal(organizationId, conv.clientId, "contactado");
+    }
 
     // 3) Acciones (el servidor valida; el modelo no toca datos).
     // Anti-alucinación: el propertyId de una acción debe ser un match real del tenant o
@@ -324,6 +334,9 @@ export async function runAgentForInboundMessage(args: {
       activeShowingIds.has(action.showingId)
     ) {
       await cancelShowing(organizationId, action.showingId);
+    } else if (action.type === "advance_stage" && action.stage) {
+      // Movimiento agéntico guiado por IA hacia etapas avanzadas (Feature 017)
+      await advanceClientDeal(organizationId, conv.clientId, action.stage);
     }
 
     // 4) Handoff (acción del modelo o heurística explícita). Motivo: 'requested' (RB-5).

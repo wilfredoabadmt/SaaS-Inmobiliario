@@ -26,6 +26,24 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  try {
+    const { assertPlanLimits } = await import("@/server/billing/service");
+    await assertPlanLimits(organizationId, "properties");
+  } catch (err: unknown) {
+    if (err && typeof err === "object" && "name" in err && err.name === "PlanLimitError") {
+      return Response.json(
+        {
+          error: {
+            code: "plan_limit_reached",
+            message: (err as Error).message,
+          },
+        },
+        { status: 403 },
+      );
+    }
+    throw err;
+  }
+
   const property = await createProperty(organizationId, userId, parsed.data);
   return Response.json({ id: property.id, property }, { status: 201 });
 }

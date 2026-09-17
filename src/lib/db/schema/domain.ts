@@ -437,6 +437,8 @@ export const showing = pgTable(
     googleEventId: text("google_event_id"),
     // Idempotencia del recordatorio 1 h por email (feature 011, DV-VS-10).
     reminderEmailSentAt: timestamp("reminder_email_sent_at"),
+    // Idempotencia del recordatorio por WhatsApp al cliente (feature 016).
+    reminderWaSentAt: timestamp("reminder_wa_sent_at"),
     status: showingStatus("status").notNull().default("agendada"),
     notes: text("notes"),
     createdAt: timestamp("created_at").notNull().defaultNow(),
@@ -648,3 +650,30 @@ export const instagramDm = pgTable(
     index("instagram_dm_org_counterparty_idx").on(t.organizationId, t.counterpartyIgsid),
   ],
 );
+
+/**
+ * Suscripciones y facturación multi-tenant (Feature 019).
+ * Cada organización tiene un registro de suscripción que determina sus cuotas, límites y estado.
+ */
+export const subscription = pgTable(
+  "subscription",
+  {
+    id: text("id").primaryKey(),
+    organizationId: text("organization_id")
+      .notNull()
+      .references(() => organization.id, { onDelete: "cascade" }),
+    plan: text("plan").notNull().default("starter"),
+    status: text("status").notNull().default("active"),
+    stripeCustomerId: text("stripe_customer_id"),
+    stripeSubscriptionId: text("stripe_subscription_id"),
+    currentPeriodEnd: timestamp("current_period_end"),
+    cancelAtPeriodEnd: boolean("cancel_at_period_end").notNull().default(false),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  },
+  (t) => [
+    uniqueIndex("subscription_org_uq").on(t.organizationId),
+    uniqueIndex("subscription_stripe_sub_uq").on(t.stripeSubscriptionId),
+  ],
+);
+

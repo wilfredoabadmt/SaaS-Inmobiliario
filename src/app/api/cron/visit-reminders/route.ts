@@ -1,13 +1,16 @@
 import type { NextRequest } from "next/server";
 import { getEnv } from "@/lib/env";
 import { sendDueReminders } from "@/server/calendar/reminders";
+import { sendDueClientWaReminders } from "@/server/showings/client-reminder";
 
 export const dynamic = "force-dynamic";
 
 /**
- * POST /api/cron/visit-reminders — envía el recordatorio 1 h antes de cada visita. Protegido por
- * `CRON_SECRET` (header `X-Cron-Secret` o `?secret=`). Lo dispara una scheduled task de Coolify
- * cada ~5 min (DV-VS-10).
+ * POST /api/cron/visit-reminders — envía:
+ * 1. Recordatorio 1 h antes al asesor por correo electrónico.
+ * 2. Recordatorio ~24 h antes al cliente por WhatsApp (Feature 016).
+ *
+ * Protegido por `CRON_SECRET` (header `X-Cron-Secret` o `?secret=`).
  */
 export async function POST(req: NextRequest) {
   const secret = getEnv().CRON_SECRET;
@@ -20,6 +23,16 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const result = await sendDueReminders();
-  return Response.json(result, { status: 200 });
+  const [emailResult, waResult] = await Promise.all([
+    sendDueReminders(),
+    sendDueClientWaReminders(),
+  ]);
+
+  return Response.json(
+    {
+      adviserEmail: emailResult,
+      clientWhatsApp: waResult,
+    },
+    { status: 200 },
+  );
 }

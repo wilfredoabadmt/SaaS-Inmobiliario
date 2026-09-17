@@ -1,11 +1,42 @@
-import { headers } from "next/headers";
-import { auth } from "@/lib/auth";
+import { requireMember } from "@/lib/auth/guards";
+import { getProfile } from "@/server/account/profile";
+import { getOrganization } from "@/server/organization/settings";
+import {
+  getDashboardKpis,
+  getRecentActivity,
+  getSlaBreachedCount,
+  getUpcomingVisits,
+} from "@/server/dashboard/queries";
 import { DashboardView } from "@/components/dashboard/dashboard-view";
 
 export const dynamic = "force-dynamic";
 
+/**
+ * Pantalla de inicio del CRM con métricas, KPIs, SLA y visitas 100% reales (Feature 014).
+ */
 export default async function DashboardHome() {
-  const session = await auth.api.getSession({ headers: await headers() });
-  const firstName = session?.user?.name?.trim().split(/\s+/)[0] ?? "";
-  return <DashboardView firstName={firstName} />;
+  const ctx = await requireMember();
+
+  const [profile, org, kpis, slaCount, upcomingVisits, recentActivity] = await Promise.all([
+    getProfile(ctx.userId),
+    getOrganization(ctx.organizationId),
+    getDashboardKpis(ctx.organizationId),
+    getSlaBreachedCount(ctx.organizationId, 30),
+    getUpcomingVisits(ctx.organizationId, 5),
+    getRecentActivity(ctx.organizationId, 6),
+  ]);
+
+  const firstName = profile?.name?.trim().split(/\s+/)[0] ?? "";
+  const agencyName = org?.name ?? "Mi agencia";
+
+  return (
+    <DashboardView
+      firstName={firstName}
+      agencyName={agencyName}
+      kpis={kpis}
+      slaCount={slaCount}
+      upcomingVisits={upcomingVisits}
+      recentActivity={recentActivity}
+    />
+  );
 }

@@ -120,6 +120,8 @@ export interface WhatsAppTextMessage {
   timestamp: string;
   type: string;
   text?: { body: string };
+  audio?: { id: string; mime_type?: string };
+  voice?: { id: string; mime_type?: string };
   // Respuesta a un botón interactivo (feature 006). El tap de un reply button llega como
   // type:"interactive" con interactive.button_reply.{id,title} (verificado vs doc de Meta
   // 2026-06-20). NO confundir con el botón de plantilla (type:"button" / button.payload).
@@ -437,4 +439,40 @@ export async function uploadResumableSample(
   const handle = (upBody as { h?: string } | undefined)?.h;
   if (!handle) throw new MetaApiError(500, "Resumable upload sin handle", upBody);
   return handle;
+}
+
+/**
+ * Consulta la URL temporal de descarga de un medio en Meta Cloud API (Feature 018).
+ */
+export async function fetchMediaUrl(
+  mediaId: string,
+  token: string,
+): Promise<{ url: string; mimeType: string; fileSize?: number }> {
+  const data = await graphRequest<{ url: string; mime_type: string; file_size?: number }>(
+    mediaId,
+    {},
+    token,
+  );
+  if (!data?.url) throw new MetaApiError(404, "URL de medio no disponible en Meta");
+  return { url: data.url, mimeType: data.mime_type, fileSize: data.file_size };
+}
+
+/**
+ * Descarga el binario de un medio de WhatsApp utilizando el Bearer token (Feature 018).
+ */
+export async function downloadMediaBinary(
+  url: string,
+  token: string,
+): Promise<{ buffer: Buffer; contentType: string }> {
+  const res = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!res.ok) {
+    throw new MetaApiError(res.status, `Fallo al descargar medio binario (${res.status})`);
+  }
+  const arrayBuffer = await res.arrayBuffer();
+  const contentType = res.headers.get("content-type") ?? "application/octet-stream";
+  return { buffer: Buffer.from(arrayBuffer), contentType };
 }

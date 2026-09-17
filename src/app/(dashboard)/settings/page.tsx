@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {
   Building2,
+  CreditCard,
   Instagram,
   MessageCircle,
   Settings,
@@ -61,6 +62,13 @@ const CARDS: readonly SettingsCard[] = [
     title: "Instagram",
     description: "Conecta tu cuenta para publicar, moderar y mensajear.",
     icon: Instagram,
+    ownerOnly: true,
+  },
+  {
+    href: "/settings/billing",
+    title: "Facturación",
+    description: "Planes, cuotas de propiedades y suscripción.",
+    icon: CreditCard,
     ownerOnly: true,
   },
 ];

@@ -71,6 +71,13 @@ const envSchema = z.object({
   SMTP_FROM: z.string().default(""),
   MAIL_FROM_NAME: z.string().default("Homya"),
 
+  // Stripe / Billing (feature 019) — Opcionales/degradables: si faltan, el sistema opera
+  // en modo desarrollo / self-hosted permitiendo la gestión de planes sin Stripe.
+  STRIPE_SECRET_KEY: z.string().default(""),
+  STRIPE_WEBHOOK_SECRET: z.string().default(""),
+  STRIPE_PRO_PRICE_ID: z.string().default(""),
+  STRIPE_ENTERPRISE_PRICE_ID: z.string().default(""),
+
   // Almacenamiento de objetos (interfaz S3 estándar)
   S3_ENDPOINT: z.string().url(),
   S3_REGION: z.string().min(1),
@@ -162,3 +169,11 @@ export function isGoogleCalendarConfigured(env: Env = getEnv()): boolean {
 export function isEmailConfigured(env: Env = getEnv()): boolean {
   return Boolean(env.SMTP_HOST && env.SMTP_USER && env.SMTP_PASS);
 }
+
+/**
+ * ¿Está configurado Stripe (feature 019)? Si falta, el sistema degrada a modo simulado/desarrollo.
+ */
+export function isStripeConfigured(env: Env = getEnv()): boolean {
+  return Boolean(env.STRIPE_SECRET_KEY);
+}
+
